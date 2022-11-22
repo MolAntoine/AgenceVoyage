@@ -23,6 +23,9 @@ public class TrajetHoraire implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+   // private Date circ;
+  //  private int numtrain;
+    
     private List<Troncon> trajet; 
     
     

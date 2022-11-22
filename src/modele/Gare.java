@@ -35,6 +35,11 @@ public class Gare implements Serializable {
     @Column(name="GLONG",nullable = false)
     private double lng;
 
+    public Gare() {
+    }
+
+    
+    
     public Gare(String nom, String ville, int codepost, double lat, double lng) {
         this.nom = nom;
         this.ville = ville;

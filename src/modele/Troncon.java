@@ -7,12 +7,15 @@ package modele;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,40 +29,58 @@ public class Troncon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE })
     @JoinColumn(name = "GARDEP")
     private Gare garedepart;
+    @OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE })
     @JoinColumn(name = "GARRIV")
     private Gare gerarrivee;
-    @Temporal(TemporalType.DATE)
+    @Column(name = "PRIX",nullable = false)
+    private double prix;
+    @Temporal(TemporalType.TIME)
     @Column(name="TDDEP", nullable = false)
     private Date datedepart;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIME)
     @Column(name="TDARR", nullable = false)
     private Date datearrivee;
 
+    
+    public Troncon(Gare garedepart, Gare gerarrivee, double prix, Date datedepart, Date datearrivee) {
+        this.garedepart = garedepart;
+        this.gerarrivee = gerarrivee;
+        this.prix = prix;
+        this.datedepart = datedepart;
+        this.datearrivee = datearrivee;
+    }
+
+    public Troncon() {
+    }
+    
+    
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Troncon)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Troncon other = (Troncon) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Troncon other = (Troncon) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -67,7 +88,9 @@ public class Troncon implements Serializable {
 
     @Override
     public String toString() {
-        return "modele.Troncon[ id=" + id + " ]";
+        return "Troncon{" + "id=" + id + ", garedepart=" + garedepart + ", gerarrivee=" + gerarrivee + ", prix=" + prix + ", datedepart=" + datedepart + ", datearrivee=" + datearrivee + '}';
     }
-    
+
+  
+
 }

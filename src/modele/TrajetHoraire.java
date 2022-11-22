@@ -6,11 +6,18 @@
 package modele;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -22,38 +29,48 @@ public class TrajetHoraire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-   // private Date circ;
-  //  private int numtrain;
-    
+    @Temporal(TemporalType.DATE)
+    @Column(name="DATECIR", nullable = false)
+    private Date circ;
+    @Column(name="NUMTR", nullable = false)
+    private int numtrain;
+    @OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE })
     private List<Troncon> trajet; 
-    
-    
-    
 
+    public TrajetHoraire() {
+    }
+
+    public TrajetHoraire(Date circ, int numtrain, List<Troncon> trajet) {
+        this.circ = circ;
+        this.numtrain = numtrain;
+        this.trajet = trajet;
+    }
+    
+    
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TrajetHoraire)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        TrajetHoraire other = (TrajetHoraire) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TrajetHoraire other = (TrajetHoraire) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -61,7 +78,9 @@ public class TrajetHoraire implements Serializable {
 
     @Override
     public String toString() {
-        return "modele.TrajetHoraire[ id=" + id + " ]";
+        return "TrajetHoraire{" + "id=" + id + ", circ=" + circ + ", numtrain=" + numtrain + ", trajet=" + trajet + '}';
     }
-    
+
+
+
 }

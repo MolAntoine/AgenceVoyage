@@ -5,11 +5,18 @@
  */
 package Tests;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import modele.Gare;
+import modele.TrajetHoraire;
+import modele.Troncon;
+import modele.Utilisateur;
 
 /**
  *
@@ -24,8 +31,25 @@ public class Test1 {
             try{
                 et.begin();
                 Gare g = new Gare("test","testtown", 62370,10.0, 15.0);
-                em.persist(g);
-
+                Gare g2 = new Gare("test2","testtown2", 62470,10.6, 15.98);
+                Gare g3 = new Gare("test3","testtown3", 62490,23.0, 18.0);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+                Date d = simpleDateFormat.parse("12:05");
+                Date d2 = simpleDateFormat.parse("12:35");
+                Troncon t = new Troncon(g,g2,152,d,d2);
+                d = simpleDateFormat.parse("13:00");
+                Troncon t2 = new Troncon(g2,g3,15,d2,d);
+                List<Troncon> ls = new ArrayList<>();
+                ls.add(t);
+                ls.add(t2);
+                SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+                Date tdate = simpleDateFormat2.parse("05/11/2022");
+                TrajetHoraire tr = new TrajetHoraire(tdate, 2390, ls);
+                
+                Utilisateur u = new Utilisateur("1234", "mdp","jean", "kevin", "123 RUE JSP",tdate, true);
+               
+                em.persist(tr);
+                em.persist(u);
                 et.commit();
                 } catch (Exception ex) {
                 et.rollback();

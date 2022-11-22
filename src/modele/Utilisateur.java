@@ -7,6 +7,7 @@ package modele;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,31 +41,56 @@ public class Utilisateur implements Serializable {
     Date naissance;
     @Column(name="ISAD", nullable = false)
     Boolean admin;
+
+    public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin) {
+        this.login = login;
+        this.mdp = mdp;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.naissance = naissance;
+        this.admin = admin;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    public Utilisateur() {
+    }
+    
+    
+    
     
     
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Utilisateur)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Utilisateur other = (Utilisateur) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Utilisateur other = (Utilisateur) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -72,7 +98,8 @@ public class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "modele.Utilisateur[ id=" + id + " ]";
+        return "Utilisateur{" + "id=" + id + ", login=" + login + ", mdp=" + mdp + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", naissance=" + naissance + ", admin=" + admin + '}';
     }
-    
+
+
 }

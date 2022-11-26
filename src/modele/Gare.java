@@ -6,6 +6,8 @@
 package modele;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,39 +15,65 @@ import javax.persistence.Id;
 
 /**
  *
- * @author komaeda
+ * @author Dober
  */
 @Entity
 public class Gare implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name="GNOM",unique = true, nullable = false)
+    private String nom;
+    @Column(name="GVILLE",nullable = false)
+    private String ville;
+    @Column(name="GCODE",nullable = false)
+    private int codepost;
+    @Column(name="GLAT",nullable = false)
+    private double lat;
+    @Column(name="GLONG",nullable = false)
+    private double lng;
+
+    public Gare() {
+    }
+
+    
+    
+    public Gare(String nom, String ville, int codepost, double lat, double lng) {
+        this.nom = nom;
+        this.ville = ville;
+        this.codepost = codepost;
+        this.lat = lat;
+        this.lng = lng;
+    }
+    
+    
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.nom);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Gare)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Gare other = (Gare) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Gare other = (Gare) obj;
+        if (!Objects.equals(this.nom, other.nom)) {
             return false;
         }
         return true;
@@ -53,7 +81,9 @@ public class Gare implements Serializable {
 
     @Override
     public String toString() {
-        return "modele.Gare[ id=" + id + " ]";
+        return "Gare{" + "id=" + id + ", nom=" + nom + ", ville=" + ville + ", codepost=" + codepost + ", lat=" + lat + ", lng=" + lng + '}';
     }
-    
+
+
+
 }

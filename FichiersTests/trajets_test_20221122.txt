@@ -1,0 +1,486 @@
+DebutTrajet
+22/11/2022	0000	lille europe	06:00	paris nord	07:00	1
+paris nord	26
+FinTrajet
+DebutTrajet
+22/11/2022	0001	lille europe	06:57	paris nord	07:56	1
+paris nord	23
+FinTrajet
+DebutTrajet
+22/11/2022	0002	lille europe	07:57	paris nord	08:56	1
+paris nord	25
+FinTrajet
+DebutTrajet
+22/11/2022	0003	lille europe	08:56	paris nord	09:54	1
+paris nord	21
+FinTrajet
+DebutTrajet
+22/11/2022	0004	lille europe	09:54	paris nord	10:52	1
+paris nord	20
+FinTrajet
+DebutTrajet
+22/11/2022	0005	lille europe	10:55	paris nord	11:53	1
+paris nord	22
+FinTrajet
+DebutTrajet
+22/11/2022	0006	lille europe	11:56	paris nord	12:55	1
+paris nord	19
+FinTrajet
+DebutTrajet
+22/11/2022	0007	lille europe	12:54	paris nord	13:54	1
+paris nord	27
+FinTrajet
+DebutTrajet
+22/11/2022	0008	lille europe	13:51	paris nord	14:49	1
+paris nord	22
+FinTrajet
+DebutTrajet
+22/11/2022	0009	lille europe	14:51	paris nord	15:50	1
+paris nord	22
+FinTrajet
+DebutTrajet
+22/11/2022	0010	lille europe	15:53	paris nord	16:52	1
+paris nord	26
+FinTrajet
+DebutTrajet
+22/11/2022	0011	lille europe	16:54	paris nord	17:53	1
+paris nord	26
+FinTrajet
+DebutTrajet
+22/11/2022	0012	lille europe	06:30	marseille st. charles	10:56	4
+paris nord	07:30	07:36	21
+lyon part dieu	09:16	09:21	49
+avignon tgv	10:20	10:27	33
+marseille st. charles	13
+FinTrajet
+DebutTrajet
+22/11/2022	0013	lille europe	08:35	marseille st. charles	13:08	4
+paris nord	09:34	09:44	27
+lyon part dieu	11:23	11:31	37
+avignon tgv	12:29	12:39	26
+marseille st. charles	16
+FinTrajet
+DebutTrajet
+22/11/2022	0014	lille europe	10:30	marseille st. charles	14:55	4
+paris nord	11:29	11:36	28
+lyon part dieu	13:15	13:19	45
+avignon tgv	14:17	14:26	31
+marseille st. charles	13
+FinTrajet
+DebutTrajet
+22/11/2022	0015	lille europe	12:35	marseille st. charles	17:10	4
+paris nord	13:34	13:44	22
+lyon part dieu	15:26	15:34	40
+avignon tgv	16:33	16:41	29
+marseille st. charles	13
+FinTrajet
+DebutTrajet
+22/11/2022	0016	lille europe	14:29	marseille st. charles	18:55	4
+paris nord	15:28	15:35	27
+lyon part dieu	17:15	17:23	37
+avignon tgv	18:22	18:26	32
+marseille st. charles	18
+FinTrajet
+DebutTrajet
+22/11/2022	0017	paris nord	06:00	marseille st. charles	09:19	3
+lyon part dieu	07:40	07:44	42
+avignon tgv	08:44	08:50	25
+marseille st. charles	14
+FinTrajet
+DebutTrajet
+22/11/2022	0018	paris nord	07:58	marseille st. charles	11:17	3
+lyon part dieu	09:37	09:43	53
+avignon tgv	10:41	10:48	27
+marseille st. charles	16
+FinTrajet
+DebutTrajet
+22/11/2022	0019	paris nord	09:54	marseille st. charles	13:19	3
+lyon part dieu	11:32	11:42	40
+avignon tgv	12:41	12:50	30
+marseille st. charles	13
+FinTrajet
+DebutTrajet
+22/11/2022	0020	paris nord	11:51	marseille st. charles	15:14	3
+lyon part dieu	13:30	13:40	45
+avignon tgv	14:39	14:45	25
+marseille st. charles	17
+FinTrajet
+DebutTrajet
+22/11/2022	0021	paris nord	13:54	marseille st. charles	17:13	3
+lyon part dieu	15:33	15:40	39
+avignon tgv	16:40	16:44	32
+marseille st. charles	17
+FinTrajet
+DebutTrajet
+22/11/2022	0022	lille europe	06:15	nantes	10:52	2
+le mans	09:18	09:22	57
+nantes	34
+FinTrajet
+DebutTrajet
+22/11/2022	0023	lille europe	07:32	nantes	12:01	2
+le mans	10:28	10:32	61
+nantes	32
+FinTrajet
+DebutTrajet
+22/11/2022	0024	lille europe	08:50	nantes	13:29	2
+le mans	11:53	12:02	70
+nantes	26
+FinTrajet
+DebutTrajet
+22/11/2022	0025	lille europe	10:06	nantes	14:42	2
+le mans	13:06	13:11	62
+nantes	28
+FinTrajet
+DebutTrajet
+22/11/2022	0026	lille europe	11:25	nantes	15:56	2
+le mans	14:19	14:25	76
+nantes	30
+FinTrajet
+DebutTrajet
+22/11/2022	0027	lille europe	12:41	nantes	17:17	2
+le mans	15:40	15:46	63
+nantes	35
+FinTrajet
+DebutTrajet
+22/11/2022	0028	lille europe	14:01	nantes	18:42	2
+le mans	17:05	17:14	68
+nantes	29
+FinTrajet
+DebutTrajet
+22/11/2022	0029	lille europe	15:20	nantes	19:52	2
+le mans	18:20	18:24	77
+nantes	33
+FinTrajet
+DebutTrajet
+22/11/2022	0030	lille europe	16:43	nantes	21:19	2
+le mans	19:46	19:51	62
+nantes	25
+FinTrajet
+DebutTrajet
+22/11/2022	0031	lille europe	18:03	nantes	22:36	2
+le mans	20:57	21:05	54
+nantes	26
+FinTrajet
+DebutTrajet
+22/11/2022	0032	nancy	06:00	rennes	11:15	5
+metz ville	06:37	06:44	11
+reims centre	08:16	08:24	21
+paris nord	09:09	09:19	58
+le mans	10:11	10:21	45
+rennes	41
+FinTrajet
+DebutTrajet
+22/11/2022	0033	nancy	07:13	rennes	12:27	5
+metz ville	07:51	07:56	13
+reims centre	09:29	09:39	27
+paris nord	10:23	10:31	47
+le mans	11:25	11:33	35
+rennes	39
+FinTrajet
+DebutTrajet
+22/11/2022	0034	nancy	08:24	rennes	13:26	5
+metz ville	09:01	09:06	13
+reims centre	10:38	10:44	30
+paris nord	11:28	11:32	50
+le mans	12:24	12:31	43
+rennes	41
+FinTrajet
+DebutTrajet
+22/11/2022	0035	nancy	09:40	rennes	14:47	5
+metz ville	10:18	10:22	14
+reims centre	11:53	12:02	24
+paris nord	12:48	12:53	61
+le mans	13:47	13:52	52
+rennes	42
+FinTrajet
+DebutTrajet
+22/11/2022	0036	nancy	10:55	rennes	16:08	5
+metz ville	11:32	11:40	11
+reims centre	13:13	13:23	30
+paris nord	14:08	14:14	48
+le mans	15:08	15:12	37
+rennes	40
+FinTrajet
+DebutTrajet
+22/11/2022	0037	nancy	12:06	rennes	17:15	5
+metz ville	12:43	12:49	12
+reims centre	14:22	14:32	21
+paris nord	15:17	15:24	48
+le mans	16:16	16:20	37
+rennes	31
+FinTrajet
+DebutTrajet
+22/11/2022	0038	nancy	13:23	rennes	18:36	5
+metz ville	14:01	14:11	12
+reims centre	15:43	15:49	24
+paris nord	16:34	16:43	62
+le mans	17:36	17:40	47
+rennes	36
+FinTrajet
+DebutTrajet
+22/11/2022	0039	nancy	14:40	rennes	19:48	5
+metz ville	15:18	15:24	12
+reims centre	16:57	17:04	21
+paris nord	17:49	17:53	52
+le mans	18:46	18:52	49
+rennes	40
+FinTrajet
+DebutTrajet
+22/11/2022	0040	nancy	15:51	rennes	20:53	5
+metz ville	16:29	16:33	13
+reims centre	18:04	18:08	28
+paris nord	18:52	18:56	60
+le mans	19:49	19:58	51
+rennes	32
+FinTrajet
+DebutTrajet
+22/11/2022	0041	nancy	17:02	rennes	22:11	5
+metz ville	17:38	17:48	14
+reims centre	19:20	19:26	21
+paris nord	20:11	20:17	46
+le mans	21:10	21:15	45
+rennes	31
+FinTrajet
+DebutTrajet
+22/11/2022	0042	paris nord	06:00	lille europe	06:58	1
+lille europe	25
+FinTrajet
+DebutTrajet
+22/11/2022	0043	paris nord	06:57	lille europe	07:57	1
+lille europe	23
+FinTrajet
+DebutTrajet
+22/11/2022	0044	paris nord	07:56	lille europe	08:54	1
+lille europe	26
+FinTrajet
+DebutTrajet
+22/11/2022	0045	paris nord	08:57	lille europe	09:56	1
+lille europe	26
+FinTrajet
+DebutTrajet
+22/11/2022	0046	paris nord	09:57	lille europe	10:55	1
+lille europe	20
+FinTrajet
+DebutTrajet
+22/11/2022	0047	paris nord	10:58	lille europe	11:58	1
+lille europe	23
+FinTrajet
+DebutTrajet
+22/11/2022	0048	paris nord	11:55	lille europe	12:53	1
+lille europe	19
+FinTrajet
+DebutTrajet
+22/11/2022	0049	paris nord	12:56	lille europe	13:55	1
+lille europe	21
+FinTrajet
+DebutTrajet
+22/11/2022	0050	paris nord	13:58	lille europe	14:58	1
+lille europe	22
+FinTrajet
+DebutTrajet
+22/11/2022	0051	paris nord	15:00	lille europe	15:59	1
+lille europe	28
+FinTrajet
+DebutTrajet
+22/11/2022	0052	paris nord	15:59	lille europe	16:59	1
+lille europe	21
+FinTrajet
+DebutTrajet
+22/11/2022	0053	paris nord	16:58	lille europe	17:56	1
+lille europe	24
+FinTrajet
+DebutTrajet
+22/11/2022	0054	marseille st. charles	06:30	lille europe	10:58	4
+avignon tgv	06:59	07:08	14
+lyon part dieu	08:07	08:11	27
+paris nord	09:52	10:00	42
+lille europe	22
+FinTrajet
+DebutTrajet
+22/11/2022	0055	marseille st. charles	08:25	lille europe	12:49	4
+avignon tgv	08:54	08:58	16
+lyon part dieu	09:57	10:04	27
+paris nord	11:45	11:51	42
+lille europe	26
+FinTrajet
+DebutTrajet
+22/11/2022	0056	marseille st. charles	10:20	lille europe	14:49	4
+avignon tgv	10:49	10:55	17
+lyon part dieu	11:55	12:02	31
+paris nord	13:40	13:50	38
+lille europe	25
+FinTrajet
+DebutTrajet
+22/11/2022	0057	marseille st. charles	12:19	lille europe	16:48	4
+avignon tgv	12:48	12:54	16
+lyon part dieu	13:52	14:01	29
+paris nord	15:43	15:48	41
+lille europe	22
+FinTrajet
+DebutTrajet
+22/11/2022	0058	marseille st. charles	14:22	lille europe	18:49	4
+avignon tgv	14:51	14:56	18
+lyon part dieu	15:55	16:04	26
+paris nord	17:43	17:50	36
+lille europe	21
+FinTrajet
+DebutTrajet
+22/11/2022	0059	marseille st. charles	06:00	paris nord	09:21	3
+avignon tgv	06:29	06:38	13
+lyon part dieu	07:38	07:44	30
+paris nord	52
+FinTrajet
+DebutTrajet
+22/11/2022	0060	marseille st. charles	07:59	paris nord	11:26	3
+avignon tgv	08:28	08:38	19
+lyon part dieu	09:38	09:46	30
+paris nord	40
+FinTrajet
+DebutTrajet
+22/11/2022	0061	marseille st. charles	09:58	paris nord	13:15	3
+avignon tgv	10:27	10:33	17
+lyon part dieu	11:31	11:35	32
+paris nord	43
+FinTrajet
+DebutTrajet
+22/11/2022	0062	marseille st. charles	11:56	paris nord	15:16	3
+avignon tgv	12:25	12:32	15
+lyon part dieu	13:32	13:38	26
+paris nord	51
+FinTrajet
+DebutTrajet
+22/11/2022	0063	marseille st. charles	14:00	paris nord	17:28	3
+avignon tgv	14:29	14:36	18
+lyon part dieu	15:36	15:46	30
+paris nord	53
+FinTrajet
+DebutTrajet
+22/11/2022	0064	nantes	06:15	lille europe	10:55	2
+le mans	07:45	07:55	25
+lille europe	77
+FinTrajet
+DebutTrajet
+22/11/2022	0065	nantes	07:32	lille europe	12:07	2
+le mans	08:59	09:08	24
+lille europe	73
+FinTrajet
+DebutTrajet
+22/11/2022	0066	nantes	08:53	lille europe	13:34	2
+le mans	10:23	10:33	31
+lille europe	57
+FinTrajet
+DebutTrajet
+22/11/2022	0067	nantes	10:16	lille europe	14:49	2
+le mans	11:43	11:53	26
+lille europe	67
+FinTrajet
+DebutTrajet
+22/11/2022	0068	nantes	11:34	lille europe	16:12	2
+le mans	13:03	13:12	35
+lille europe	56
+FinTrajet
+DebutTrajet
+22/11/2022	0069	nantes	12:50	lille europe	17:26	2
+le mans	14:19	14:29	26
+lille europe	77
+FinTrajet
+DebutTrajet
+22/11/2022	0070	nantes	14:13	lille europe	18:45	2
+le mans	15:42	15:51	34
+lille europe	71
+FinTrajet
+DebutTrajet
+22/11/2022	0071	nantes	15:32	lille europe	20:07	2
+le mans	16:59	17:09	25
+lille europe	74
+FinTrajet
+DebutTrajet
+22/11/2022	0072	nantes	16:53	lille europe	21:23	2
+le mans	18:20	18:24	28
+lille europe	52
+FinTrajet
+DebutTrajet
+22/11/2022	0073	nantes	18:14	lille europe	22:48	2
+le mans	19:42	19:51	28
+lille europe	66
+FinTrajet
+DebutTrajet
+22/11/2022	0074	rennes	06:00	nancy	11:15	5
+le mans	06:55	07:03	42
+paris nord	07:55	08:04	49
+reims centre	08:50	08:57	64
+metz ville	10:28	10:38	27
+nancy	14
+FinTrajet
+DebutTrajet
+22/11/2022	0075	rennes	07:13	nancy	12:23	5
+le mans	08:07	08:17	29
+paris nord	09:09	09:16	42
+reims centre	10:00	10:08	62
+metz ville	11:37	11:46	27
+nancy	12
+FinTrajet
+DebutTrajet
+22/11/2022	0076	rennes	08:24	nancy	13:35	5
+le mans	09:18	09:28	35
+paris nord	10:22	10:26	36
+reims centre	11:12	11:19	63
+metz ville	12:49	12:59	21
+nancy	10
+FinTrajet
+DebutTrajet
+22/11/2022	0077	rennes	09:37	nancy	14:39	5
+le mans	10:31	10:38	33
+paris nord	11:31	11:36	36
+reims centre	12:20	12:27	50
+metz ville	13:56	14:03	26
+nancy	14
+FinTrajet
+DebutTrajet
+22/11/2022	0078	rennes	10:53	nancy	16:02	5
+le mans	11:47	11:55	30
+paris nord	12:48	12:55	40
+reims centre	13:39	13:45	50
+metz ville	15:17	15:26	29
+nancy	10
+FinTrajet
+DebutTrajet
+22/11/2022	0079	rennes	12:05	nancy	17:18	5
+le mans	12:59	13:08	41
+paris nord	14:01	14:08	48
+reims centre	14:54	15:02	56
+metz ville	16:31	16:41	25
+nancy	13
+FinTrajet
+DebutTrajet
+22/11/2022	0080	rennes	13:21	nancy	18:28	5
+le mans	14:17	14:22	42
+paris nord	15:14	15:19	37
+reims centre	16:05	16:10	54
+metz ville	17:42	17:50	27
+nancy	14
+FinTrajet
+DebutTrajet
+22/11/2022	0081	rennes	14:33	nancy	19:42	5
+le mans	15:28	15:35	36
+paris nord	16:27	16:33	38
+reims centre	17:19	17:29	48
+metz ville	19:00	19:05	27
+nancy	10
+FinTrajet
+DebutTrajet
+22/11/2022	0082	rennes	15:47	nancy	20:47	5
+le mans	16:41	16:48	43
+paris nord	17:40	17:44	43
+reims centre	18:30	18:37	63
+metz ville	20:06	20:11	21
+nancy	14
+FinTrajet
+DebutTrajet
+22/11/2022	0083	rennes	17:00	nancy	22:05	5
+le mans	17:54	17:59	34
+paris nord	18:52	18:58	41
+reims centre	19:44	19:48	53
+metz ville	21:17	21:27	27
+nancy	14
+FinTrajet

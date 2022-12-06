@@ -14,7 +14,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import modele.Gare;
-import modele.TrajetHoraire;
+import modele.Train;
+import modele.TrajetUtilisateur;
 import modele.Troncon;
 import modele.Utilisateur;
 
@@ -37,16 +38,19 @@ public class Test1 {
                 Date d = simpleDateFormat.parse("12:05");
                 Date d2 = simpleDateFormat.parse("12:35");
                 Troncon t = new Troncon(g,g2,152,d,d2);
-                d = simpleDateFormat.parse("13:00");
-                Troncon t2 = new Troncon(g2,g3,15,d2,d);
+                Date d3 = simpleDateFormat.parse("13:00");
+                Troncon t2 = new Troncon(g2,g3,15,d2,d3);
                 List<Troncon> ls = new ArrayList<>();
                 ls.add(t);
                 ls.add(t2);
                 SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
                 Date tdate = simpleDateFormat2.parse("05/11/2022");
-                TrajetHoraire tr = new TrajetHoraire(tdate, 2390, ls);
-                
-                Utilisateur u = new Utilisateur("1234", "mdp","jean", "kevin", "123 RUE JSP",tdate, true);
+                Train tr = new Train(tdate, 2390, ls);
+                TrajetUtilisateur tU = new TrajetUtilisateur(ls);
+                tU.calculate();
+                List<TrajetUtilisateur> ltu = new ArrayList<>();
+                ltu.add(tU);
+                Utilisateur u = new Utilisateur("1234", "mdp","jean", "kevin", "123 RUE JSP",tdate, true,ltu);
                
                 em.persist(tr);
                 em.persist(u);

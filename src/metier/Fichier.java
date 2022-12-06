@@ -17,7 +17,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import modele.Gare;
-import modele.TrajetHoraire;
+import modele.Train;
 import modele.Troncon;
 import modele.Utilisateur;
 
@@ -134,7 +134,7 @@ public class Fichier {
                     }
                 }
             }
-            em.persist(new TrajetHoraire(trainDate,noTrain,lt));
+            em.persist(new Train(trainDate,noTrain,lt));
             line = reader.readLine();
             if(line!= null) args = line.split("\t");
         }

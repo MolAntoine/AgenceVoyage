@@ -7,12 +7,15 @@ package modele;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -41,8 +44,13 @@ public class Utilisateur implements Serializable {
     Date naissance;
     @Column(name="ISAD", nullable = false)
     Boolean admin;
+    @OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE})
+    private List<TrajetUtilisateur> trajetsUser; 
+    
+    
+    
 
-    public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin) {
+    public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin,List<TrajetUtilisateur> trajetsUser) {
         this.login = login;
         this.mdp = mdp;
         this.nom = nom;
@@ -50,6 +58,7 @@ public class Utilisateur implements Serializable {
         this.adresse = adresse;
         this.naissance = naissance;
         this.admin = admin;
+        this.trajetsUser = trajetsUser;
     }
     
     public Utilisateur() {

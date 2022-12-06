@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
  * @author Dober
  */
 @Entity
-public class TrajetHoraire implements Serializable {
+public class Train implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +37,10 @@ public class TrajetHoraire implements Serializable {
     @OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE })
     private List<Troncon> trajet; 
 
-    public TrajetHoraire() {
+    public Train() {
     }
 
-    public TrajetHoraire(Date circ, int numtrain, List<Troncon> trajet) {
+    public Train(Date circ, int numtrain, List<Troncon> trajet) {
         this.circ = circ;
         this.numtrain = numtrain;
         this.trajet = trajet;
@@ -69,7 +69,7 @@ public class TrajetHoraire implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final TrajetHoraire other = (TrajetHoraire) obj;
+        final Train other = (Train) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

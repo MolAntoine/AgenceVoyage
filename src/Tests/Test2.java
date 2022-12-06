@@ -19,7 +19,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import metier.Fichier;
 import modele.Gare;
-import modele.TrajetHoraire;
+import modele.Train;
 import modele.Troncon;
 import modele.Utilisateur;
 

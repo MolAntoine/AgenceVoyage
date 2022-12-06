@@ -29,6 +29,7 @@ public class Troncon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE })
     @JoinColumn(name = "GARDEP")
     private Gare gareDepart;
@@ -60,6 +61,22 @@ public class Troncon implements Serializable {
     public Long getId() {
         return id;
     }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public Date getHeureDepart() {
+        return heureDepart;
+    }
+
+    public Date getHeureArrivee() {
+        return heureArrivee;
+    }
+    
+    
+    
+    
 
     @Override
     public int hashCode() {

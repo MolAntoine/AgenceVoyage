@@ -7,10 +7,6 @@ package Tests;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -18,10 +14,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import metier.Fichier;
-import modele.Gare;
-import modele.TrajetHoraire;
-import modele.Troncon;
-import modele.Utilisateur;
 
 /**
  *

@@ -62,7 +62,6 @@ public class TrajetUtilisateur implements Serializable {
             temps = tempsarr - tempsdep;
             
         }
-        System.out.println(temps);
     }
     
     

@@ -6,6 +6,7 @@
 package modele;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -56,6 +57,11 @@ public class Troncon implements Serializable {
 
     public Troncon() {
     }
+
+    public Gare getGareArrivee() {
+        return gareArrivee;
+    }
+    
     
     
     public Long getId() {
@@ -105,7 +111,19 @@ public class Troncon implements Serializable {
 
     @Override
     public String toString() {
-        return "Troncon{" + "id=" + id + ", garedepart=" + gareDepart + ", gerarrivee=" + gareArrivee + ", prix=" + prix + ", datedepart=" + heureDepart + ", datearrivee=" + heureArrivee + '}';
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String heureEtMinutes = dateFormat.format(heureDepart);
+        int heured = Integer.parseInt(heureEtMinutes.split(":")[0]);
+        int minutesd = Integer.parseInt(heureEtMinutes.split(":")[1]);
+        heureEtMinutes = dateFormat.format(heureArrivee);
+        int heurea = Integer.parseInt(heureEtMinutes.split(":")[0]);
+        int minutesa = Integer.parseInt(heureEtMinutes.split(":")[1]);
+        return "Troncon{" + "id=" + id + ", garedepart=" + gareDepart + ", gerarrivee=" 
+                + gareArrivee + ", prix=" + prix 
+                + ", heuredepart=" + Integer.toString(heured) +":" +Integer.toString(minutesd)
+                + ", heurearrivee=" + Integer.toString(heurea) +":" +Integer.toString(minutesa) + '}';
     }
 
   

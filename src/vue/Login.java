@@ -1,6 +1,12 @@
 package vue;
 
 import java.awt.Color;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import metier.Requetes;
+
 
 
 /**
@@ -54,6 +60,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         loginButton.setText("Se connecter");
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginButtonMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -144,6 +155,30 @@ public class Login extends javax.swing.JFrame {
     private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
         Register r = new Register();
     }//GEN-LAST:event_registerButtonMouseClicked
+
+    private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
+        Requetes req = new Requetes();
+        String username = this.username.getText();
+        String passwd= "";
+        char[] chars =this.password.getPassword();
+        final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
+        final EntityManager em = emf.createEntityManager();
+        
+        for(char c : chars) passwd += c;
+        
+        if (username.isEmpty() || passwd.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Entrée invalide");
+        }
+        else {
+            if(req.checkUtilisateur(em, username, passwd)){
+                
+            }
+            else{
+                
+            }
+        }
+        
+    }//GEN-LAST:event_loginButtonMouseClicked
 
     public static void main(String args[]) {
         Login l = new Login();

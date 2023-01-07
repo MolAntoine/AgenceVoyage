@@ -126,6 +126,33 @@ public class Troncon implements Serializable {
                 + ", heurearrivee=" + Integer.toString(heurea) +":" +Integer.toString(minutesa) + '}';
     }
 
+    
+    public int gettimedep(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String heureEtMinutes = dateFormat.format(heureDepart);
+        int heure = Integer.parseInt(heureEtMinutes.split(":")[0]);
+        int minutes = Integer.parseInt(heureEtMinutes.split(":")[1]);
+        return heure*60+minutes;
+    }
+    
+    
+    
+    
+    public Gare getGareDepart() {
+        return gareDepart;
+    }
+    public int gettime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String heureEtMinutes = dateFormat.format(heureDepart);
+        int heured = Integer.parseInt(heureEtMinutes.split(":")[0]);
+        int minutesd = Integer.parseInt(heureEtMinutes.split(":")[1]);
+        heureEtMinutes = dateFormat.format(heureArrivee);
+        int heurea = Integer.parseInt(heureEtMinutes.split(":")[0]);
+        int minutesa = Integer.parseInt(heureEtMinutes.split(":")[1]);
+        return (heurea-heured)*60 +minutesa - minutesd;
+    }
   
 
 }

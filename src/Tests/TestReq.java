@@ -5,19 +5,21 @@
  */
 package Tests;
 
-import java.io.IOException;
+import metier.AlgoGenetique;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import metier.Fichier;
+import metier.Individu;
+import metier.PlusCourtChemin;
 import metier.Requetes;
 import modele.Gare;
+import modele.TrajetUtilisateur;
 import modele.Troncon;
 
 /**
@@ -25,7 +27,7 @@ import modele.Troncon;
  * @author komaeda
  */
 public class TestReq {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, InterruptedException {
         Requetes r = new Requetes();
         Fichier fGares = new Fichier("gares_test.txt");
         Fichier fTrajets = new Fichier("trajets_test.txt");
@@ -60,9 +62,35 @@ public class TestReq {
 //                emf.close();
 //            }   
 //        }
-        Gare g = r.getGareDepuisNom(em, "lille europe");
-        List<Troncon> lt = new ArrayList<Troncon>();
-        lt = r.getTronconsDuTrain(em, g);
-        System.out.println(lt);
+        Gare g1 = r.getGareDepuisNom(em, "le mans");
+        Gare g2 = r.getGareDepuisNom(em, "nancy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        Date d2 = simpleDateFormat.parse("06:00");
+        AlgoGenetique g = new AlgoGenetique();
+        PlusCourtChemin c = new PlusCourtChemin();
+        //TrajetUtilisateur tu = c.plusPetitTrajet(g1, g2, d2, em);
+        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,em,5);
+        tu.calculate();
+        //System.out.println(tu.toString());
+        System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
+        List<Troncon> troncons  = tu.getTrajet();
+        for(Troncon trs : troncons){
+            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
+        }
+            System.out.println(" \n");
+        
+        
+        tu = c.plusPetitTrajet(g1, g2, d2, em);
+        tu.calculate();
+        System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
+        troncons  = tu.getTrajet();
+        for(Troncon trs : troncons){
+            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
+        }
+            System.out.println(" \n");
+          
+        
+        
+        
     }
 }

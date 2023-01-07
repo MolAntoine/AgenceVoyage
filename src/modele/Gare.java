@@ -84,6 +84,10 @@ public class Gare implements Serializable {
         return "Gare{" + "id=" + id + ", nom=" + nom + ", ville=" + ville + ", codepost=" + codepost + ", lat=" + lat + ", lng=" + lng + '}';
     }
 
+    public String getNom() {
+        return nom;
+    }
+
 
 
 }

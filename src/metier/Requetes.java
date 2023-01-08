@@ -5,12 +5,15 @@
  */
 package metier;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import modele.Gare;
+import modele.Train;
 import modele.Troncon;
 
 /**
@@ -70,6 +73,29 @@ public class Requetes {
         final String strQuery = "SELECT t FROM Troncon t";
         Query query = em.createQuery(strQuery);
         return query.getResultList();
+    }
+    public List<Troncon> getTronconsDate(EntityManager em,Date date) throws ParseException {
+        final String strQuery = "SELECT tr FROM Train tr WHERE tr.circ >= :date";
+        Query query = em.createQuery(strQuery);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        
+        Date formattedDate = dateFormat.parse(dateFormat.format(date));
+        Date formattedTime = timeFormat.parse(timeFormat.format(date));
+              
+        query.setParameter("date", formattedDate);
+               
+        List<Troncon> trs = new ArrayList<Troncon>();
+        for(Train tr : (List<Train>)query.getResultList()){
+            for(Troncon t : tr.getTrajet()){
+                if(t.getHeureDepart().after(formattedTime)){
+                    trs.add(t);
+                }
+            }
+            
+        }
+        return trs;
     }
     public List<Troncon> getTronconsDuTrain(EntityManager em, Gare gare){
         final String strQuery = "SELECT t from Troncon t "

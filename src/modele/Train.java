@@ -45,6 +45,10 @@ public class Train implements Serializable {
         this.numtrain = numtrain;
         this.trajet = trajet;
     }
+
+    public List<Troncon> getTrajet() {
+        return trajet;
+    }
     
     
     public Long getId() {

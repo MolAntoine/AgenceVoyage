@@ -21,21 +21,21 @@ public class AlgoGenetique {
     private final double mut_rate = 0.2; 
     private final int nb_loop = 100;
     private static final Random random = new Random();
-    private static List<Troncon> data;
+    private List<Troncon> data;
     EntityManager em;
     Requetes re;
 
     public AlgoGenetique(EntityManager em) {
         this.em = em;
         re = new Requetes();
-        data = re.getTroncons(em);
+     
     }
     
 
 
-    public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep,int nbmaxch,double coeftemps,double coefcout) {
+    public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep,int nbmaxch,double coeftemps,double coefcout) throws ParseException {
 
-        
+        data = re.getTronconsDate(em,dep);
         List<Individu> pop = new ArrayList<>(); 
         
         for(int i = 0;i<pop_size;i++){

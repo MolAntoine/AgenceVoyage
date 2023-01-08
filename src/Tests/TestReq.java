@@ -64,33 +64,9 @@ public class TestReq {
 //        }
         Gare g1 = r.getGareDepuisNom(em, "le mans");
         Gare g2 = r.getGareDepuisNom(em, "nancy");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        Date d2 = simpleDateFormat.parse("06:00");
-        AlgoGenetique g = new AlgoGenetique();
-        PlusCourtChemin c = new PlusCourtChemin();
-        //TrajetUtilisateur tu = c.plusPetitTrajet(g1, g2, d2, em);
-        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,em,5);
-        tu.calculate();
-        //System.out.println(tu.toString());
-        System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
-        List<Troncon> troncons  = tu.getTrajet();
-        for(Troncon trs : troncons){
-            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
-        }
-            System.out.println(" \n");
-        
-        
-//        tu = c.plusPetitTrajet(g1, g2, d2, em);
-//        tu.calculate();
-//        System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
-//        troncons  = tu.getTrajet();
-//        for(Troncon trs : troncons){
-//            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
-//        }
-//            System.out.println(" \n");
-//          
-//        
-        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
+        Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
+        List<Troncon> tr = r.getTronconsDate(em, d2);
         
     }
 }

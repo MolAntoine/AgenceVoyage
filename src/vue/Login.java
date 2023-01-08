@@ -29,7 +29,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocation(500, 500);
         this.setTitle("sncf.gouv");
         this.getContentPane().setBackground(new Color(245,250,235));
-
+        this.jLabel1.hide();
     }
 
 
@@ -38,12 +38,15 @@ public class Login extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         login = new java.awt.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
         username = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         login.setLabel("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -52,10 +55,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(jTextPane1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
         setMinimumSize(new java.awt.Dimension(344, 100));
         setPreferredSize(new java.awt.Dimension(500, 250));
+        setResizable(false);
         setSize(new java.awt.Dimension(500, 250));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -139,6 +145,14 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.5;
         getContentPane().add(passwordLabel, gridBagConstraints);
 
+        jLabel1.setForeground(new java.awt.Color(222, 50, 50));
+        jLabel1.setText("⚠ Mauvais identifiants");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        getContentPane().add(jLabel1, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,10 +185,11 @@ public class Login extends javax.swing.JFrame {
         }
         else {
             if(req.checkUtilisateur(em, username, passwd)){
-                
+                //connexion OK
             }
             else{
-                
+                //échec connexion
+                this.jLabel1.show();
             }
         }
         
@@ -185,6 +200,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextPane jTextPane1;
     private java.awt.Button login;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField password;

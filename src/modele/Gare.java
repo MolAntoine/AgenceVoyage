@@ -54,6 +54,16 @@ public class Gare implements Serializable {
         return id;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;

@@ -80,16 +80,16 @@ public class TestReq {
             System.out.println(" \n");
         
         
-        tu = c.plusPetitTrajet(g1, g2, d2, em);
-        tu.calculate();
-        System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
-        troncons  = tu.getTrajet();
-        for(Troncon trs : troncons){
-            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
-        }
-            System.out.println(" \n");
-          
-        
+//        tu = c.plusPetitTrajet(g1, g2, d2, em);
+//        tu.calculate();
+//        System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
+//        troncons  = tu.getTrajet();
+//        for(Troncon trs : troncons){
+//            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
+//        }
+//            System.out.println(" \n");
+//          
+//        
         
         
     }

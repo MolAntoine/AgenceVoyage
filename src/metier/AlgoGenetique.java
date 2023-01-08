@@ -17,36 +17,42 @@ import modele.Troncon;
 
 
 public class AlgoGenetique {
-    private static int pop_size = 2000;
-    private double mut_rate = 0.08; 
-    private int nb_loop = 100;
+    private static final int pop_size = 1000;
+    private final double mut_rate = 0.2; 
+    private final int nb_loop = 100;
     private static final Random random = new Random();
+    private static List<Troncon> data;
+    EntityManager em;
+    Requetes re;
 
-    public AlgoGenetique() {
+    public AlgoGenetique(EntityManager em) {
+        this.em = em;
+        re = new Requetes();
+        data = re.getTroncons(em);
     }
     
 
 
-    public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep, EntityManager em,int nbmaxch) {
+    public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep,int nbmaxch,double coeftemps,double coefcout) {
 
         
         List<Individu> pop = new ArrayList<>(); 
         
         for(int i = 0;i<pop_size;i++){
-            pop.add(creerIndAlea(depart,nbmaxch,em));
+            pop.add(creerIndAlea(depart,nbmaxch));
         }
         
         for (int i = 0; i < nb_loop; i++) {
         // Évaluation de la population
         for (Individu ind : pop) {
-            ind.setFitness(evaluerIndividu(ind, depart, arrivee, dep,em));
+            ind.setFitness(evaluerIndividu(ind, depart, arrivee, dep,coeftemps,coefcout));
            // System.out.println(String.valueOf(ind.getFitness()));
         };
         // Sélection des individus les plus aptes
         // Croisement des individus sélectionnés pour créer une nouvelle génération
         // Mutation de quelques individus de la nouvelle génération
         // Remplacement de la population par la nouvelle génération
-        pop = muter(croiser(selectionner(pop)),em);        
+        pop = muter(croiser(selectionner(pop)));        
     }
        List<Individu> selection = selectionner(pop);
        List<Troncon> trs = new ArrayList<>();
@@ -104,15 +110,13 @@ private List<Individu> croiser(List<Individu> parents) {
     return enfants;
 }
     
-     public List<Individu> muter(List<Individu> input,EntityManager em) {
-        Requetes re = new Requetes();
-        int nbtroncons = re.getNbTroncons(em);
+     public List<Individu> muter(List<Individu> input) {
          List<Individu> output = new ArrayList<>();
          for(Individu ind : input){
              List<Troncon> ttemp = new ArrayList<>();
              for(Troncon t : ind.getTr()){
                  if(random.nextInt()%(int)(1.0/mut_rate) == 0){
-                   ttemp.add(re.getTronconById(em,1+random.nextInt(nbtroncons)));
+                   ttemp.add(data.get(random.nextInt(data.size())));
                  }
                  else{
                      ttemp.add(t);
@@ -145,16 +149,14 @@ private List<Individu> croiser(List<Individu> parents) {
     
     
     
-    public Individu creerIndAlea(Gare depart,int nbmaxstep,EntityManager em){
+    public Individu creerIndAlea(Gare depart,int nbmaxstep){
        
-        Requetes re = new Requetes();
         
-        int nbtroncons = re.getNbTroncons(em);
         List<Troncon> trs;
         trs = new ArrayList<>();
         
         for(int i = 0;i<nbmaxstep;i++){
-           Troncon t = re.getTronconById(em,1+random.nextInt(nbtroncons));
+           Troncon t = data.get(random.nextInt(data.size()));
            trs.add(t);
         }
        trs.set(0,re.getTronconsDuTrain(em,depart).get(random.nextInt(re.getTronconsDuTrain(em,depart).size())));
@@ -162,9 +164,8 @@ private List<Individu> croiser(List<Individu> parents) {
        return t;
     }
 
-public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep, EntityManager em) {
+public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,double coeftemps,double coefcout) {
     double score = 0;
-    Requetes re = new Requetes();
 
     // Conversion de l'heure de départ en minutes
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -183,32 +184,22 @@ public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,
     // Calcul du score en fonction de la durée du trajet
     Gare garePrec = depart;
     List<Gare> visited = new ArrayList<>();
-    int isarrive = 0;
     for (Troncon troncon : ind.getTr()) {
         // Si la gare de départ du tronçon courant est la gare précédente, le tronçon est valide
         if(!visited.contains(troncon.getGareArrivee())){
-            if(troncon.getGareDepart().equals(garePrec)){
-            score+=100;
-            }     
-            if(troncon.gettimedep()>timedep){
-            score+=100/(1+0.1*(troncon.gettimedep()-timedep));
-            }
-            if(troncon.getGareArrivee().equals(arrivee)){
-                isarrive=1;
+            if(troncon.getGareDepart().equals(garePrec) && troncon.gettimedep()>=timedep){
+
+            score+=1000/(1+coeftemps*(troncon.gettimedep()-timedep));
+            score+=1000/(1+coefcout*troncon.getPrix());
             }
         }
-
         timedep += troncon.gettime();
         garePrec = troncon.getGareArrivee();
         visited.add(troncon.getGareArrivee());
     }
     if(verifierTroncons(ind.getTr(),arrivee)){
-    return 2*score;
+      score+=100;
     }
-    if(isarrive == 0){
-        return 0;
-    }
-    
     return score;
 }  
 
@@ -242,6 +233,4 @@ public boolean verifierTroncons(List<Troncon> troncons,Gare arrivee) {
     return false;
 }
 
-
-    
 }

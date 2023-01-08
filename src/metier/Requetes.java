@@ -66,6 +66,11 @@ public class Requetes {
         query.setParameter("date", date);
         return query.getResultList();
     }
+    public List<Troncon> getTroncons(EntityManager em) {
+        final String strQuery = "SELECT t FROM Troncon t";
+        Query query = em.createQuery(strQuery);
+        return query.getResultList();
+    }
     public List<Troncon> getTronconsDuTrain(EntityManager em, Gare gare){
         final String strQuery = "SELECT t from Troncon t "
                                 + "WHERE t.gareDepart = :gare";

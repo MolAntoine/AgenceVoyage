@@ -14,7 +14,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import modele.Gare;
 import modele.Train;
+import modele.TrajetUtilisateur;
 import modele.Troncon;
+import modele.Utilisateur;
 
 /**
  *
@@ -119,5 +121,4 @@ public class Requetes {
         
         return !(query.getResultList().isEmpty());
     }
-    
 }

@@ -36,5 +36,6 @@ public class TestReq {
         Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
         List<Troncon> tr = r.getTronconsDate(em, d2);
         
+        
     }
 }

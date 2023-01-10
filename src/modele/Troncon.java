@@ -127,7 +127,7 @@ public class Troncon implements Serializable {
     }
 
     
-    public int gettimedep(){
+    public int getTimeDep(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         String heureEtMinutes = dateFormat.format(heureDepart);
@@ -142,7 +142,7 @@ public class Troncon implements Serializable {
     public Gare getGareDepart() {
         return gareDepart;
     }
-    public int gettime(){
+    public int getTime(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         String heureEtMinutes = dateFormat.format(heureDepart);

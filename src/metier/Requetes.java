@@ -87,7 +87,8 @@ public class Requetes {
         query.setParameter("date", formattedDate);
                
         List<Troncon> trs = new ArrayList<Troncon>();
-        for(Train tr : (List<Train>)query.getResultList()){
+        List<Train> trains = (List<Train>)query.getResultList();
+        for(Train tr : trains){
             for(Troncon t : tr.getTrajet()){
                 if(t.getHeureDepart().after(formattedTime)){
                     trs.add(t);

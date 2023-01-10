@@ -5,21 +5,16 @@
  */
 package Tests;
 
-import metier.AlgoGenetique;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import metier.Fichier;
-import metier.Individu;
-import metier.PlusCourtChemin;
 import metier.Requetes;
 import modele.Gare;
-import modele.TrajetUtilisateur;
 import modele.Troncon;
 
 /**

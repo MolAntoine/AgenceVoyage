@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import metier.AlgoGenetique;
-import metier.PlusCourtChemin;
 import metier.Requetes;
 import modele.Gare;
 import modele.TrajetUtilisateur;
@@ -51,10 +50,10 @@ public class TestAlgo {
         if(!troncons.isEmpty()){
             points++;
             tu.calculate();
-            System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()+tu.getTrajet().get(0).gettimedep()-420));
+            System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()+tu.getTrajet().get(0).getTimeDep()-420));
         }
         for(Troncon trs : troncons){
-            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));
+            System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.getTimeDep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.getTimeDep()+trs.getTime()));
         }
             System.out.println(" \n");
         

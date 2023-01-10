@@ -1,10 +1,13 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import metier.Requetes;
 
 
@@ -15,9 +18,8 @@ import metier.Requetes;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    Timer t;
+    
     public Login() {
         initComponents();
         initFenetre();
@@ -29,7 +31,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocation(500, 500);
         this.setTitle("sncf.gouv");
         this.getContentPane().setBackground(new Color(245,250,235));
-        this.jLabel1.hide();
+        this.failedLoginLabel.setVisible(false);
     }
 
 
@@ -45,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         username = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        failedLoginLabel = new javax.swing.JLabel();
 
         login.setLabel("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -72,15 +74,15 @@ public class Login extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(16, 0, 0, 0);
         getContentPane().add(loginButton, gridBagConstraints);
 
-        password.setText("jPasswordField1");
+        password.setToolTipText("Mot de passe");
         password.setPreferredSize(new java.awt.Dimension(120, 18));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,14 +91,14 @@ public class Login extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         gridBagConstraints.weightx = 1.5;
         gridBagConstraints.insets = new java.awt.Insets(16, 0, 16, 0);
         getContentPane().add(password, gridBagConstraints);
 
-        username.setText("Nom d'utilisateur");
+        username.setToolTipText("Nom d'utilisateur");
         username.setPreferredSize(new java.awt.Dimension(120, 18));
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +107,7 @@ public class Login extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         gridBagConstraints.weightx = 1.5;
@@ -114,7 +116,7 @@ public class Login extends javax.swing.JFrame {
         usernameLabel.setText("Nom d'utilisateur");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         gridBagConstraints.weightx = 1.5;
         getContentPane().add(usernameLabel, gridBagConstraints);
@@ -122,18 +124,18 @@ public class Login extends javax.swing.JFrame {
         passwordLabel.setText("Mot de passe");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         gridBagConstraints.weightx = 1.5;
         getContentPane().add(passwordLabel, gridBagConstraints);
 
-        jLabel1.setForeground(new java.awt.Color(222, 50, 50));
-        jLabel1.setText("⚠ Mauvais identifiants");
+        failedLoginLabel.setForeground(new java.awt.Color(222, 50, 50));
+        failedLoginLabel.setText("⚠ Mauvais identifiants");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        getContentPane().add(failedLoginLabel, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,9 +155,20 @@ public class Login extends javax.swing.JFrame {
         String username = this.username.getText();
         String passwd= "";
         char[] chars =this.password.getPassword();
+        
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         final EntityManager em = emf.createEntityManager();
         
+        Login that = this;
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	that.failedLoginLabel.hide();  
+            }
+        };
+ 
+        if(t==null) t = new Timer(3000 ,taskPerformer);
+        t.setRepeats(false);
+
         for(char c : chars) passwd += c;
         
         if (username.isEmpty() || passwd.isEmpty()){
@@ -164,10 +177,15 @@ public class Login extends javax.swing.JFrame {
         else {
             if(req.checkUtilisateur(em, username, passwd)){
                 //connexion OK
+                Application a = new Application(em, username, passwd);
+                this.setVisible(false);
             }
             else{
                 //échec connexion
-                this.jLabel1.show();
+                this.failedLoginLabel.show();
+                if(!t.isRunning()) t.start();
+                else t.restart();
+                
             }
         }
         
@@ -178,7 +196,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel failedLoginLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private java.awt.Button login;

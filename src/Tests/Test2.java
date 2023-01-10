@@ -23,8 +23,8 @@ public class Test2 {
     
     
     public static void main(String[] args) {
-        Fichier fGares = new Fichier("gares_test.txt");
-        Fichier fTrajets = new Fichier("trajets_test.txt");
+        Fichier fGares = new Fichier("gares.txt");
+        Fichier fTrajets = new Fichier("trajets.txt");
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         final EntityManager em = emf.createEntityManager();
         try{

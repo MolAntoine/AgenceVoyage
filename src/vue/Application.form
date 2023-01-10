@@ -69,6 +69,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="/home/komaeda/Downloads/icons8-rechercher-plus-100.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Recherche de trajets"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[200, 200]"/>
                 </Property>

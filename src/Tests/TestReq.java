@@ -27,17 +27,17 @@ import modele.Troncon;
  */
 public class TestReq {
     public static void main(String[] args) throws ParseException, InterruptedException {
-        Requetes r = new Requetes();
         Fichier fGares = new Fichier("gares_test.txt");
         Fichier fTrajets = new Fichier("trajets_test.txt");
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         final EntityManager em = emf.createEntityManager();
+        Requetes r = new Requetes(em);
 
-        Gare g1 = r.getGareDepuisNom(em, "le mans");
-        Gare g2 = r.getGareDepuisNom(em, "nancy");
+        Gare g1 = r.getGareDepuisNom("le mans");
+        Gare g2 = r.getGareDepuisNom("nancy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
         Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
-        List<Troncon> tr = r.getTronconsDate(em, d2);
+        List<Troncon> tr = r.getTronconsDate(d2);
         
     }
 }

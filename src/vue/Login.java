@@ -151,13 +151,13 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
-        Requetes req = new Requetes();
         String username = this.username.getText();
         String passwd= "";
         char[] chars =this.password.getPassword();
         
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         final EntityManager em = emf.createEntityManager();
+        Requetes req = new Requetes(em);
         
         Login that = this;
         ActionListener taskPerformer = new ActionListener() {
@@ -175,7 +175,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Entrée invalide");
         }
         else {
-            if(req.checkUtilisateur(em, username, passwd)){
+            if(req.checkUtilisateur(username, passwd)){
                 //connexion OK
                 Application a = new Application(em, username, passwd);
                 this.setVisible(false);

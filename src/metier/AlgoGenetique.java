@@ -27,7 +27,7 @@ public class AlgoGenetique {
 
     public AlgoGenetique(EntityManager em) {
         this.em = em;
-        re = new Requetes();
+        re = new Requetes(em);
      
     }
     
@@ -35,7 +35,7 @@ public class AlgoGenetique {
 
     public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep,int nbmaxch,double coeftemps,double coefcout) throws ParseException {
 
-        data = re.getTronconsDate(em,dep);
+        data = re.getTronconsDate(dep);
         List<Individu> pop = new ArrayList<>(); 
         
         for(int i = 0;i<pop_size;i++){
@@ -159,7 +159,7 @@ private List<Individu> croiser(List<Individu> parents) {
            Troncon t = data.get(random.nextInt(data.size()));
            trs.add(t);
         }
-       trs.set(0,re.getTronconsDuTrain(em,depart).get(random.nextInt(re.getTronconsDuTrain(em,depart).size())));
+       trs.set(0,re.getTronconsDuTrain(depart).get(random.nextInt(re.getTronconsDuTrain(depart).size())));
        Individu t = new Individu(trs);
        return t;
     }

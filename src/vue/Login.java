@@ -41,7 +41,6 @@ public class Login extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         loginButton = new javax.swing.JButton();
-        registerButton = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
         username = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
@@ -80,23 +79,6 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(loginButton, gridBagConstraints);
-
-        registerButton.setText("Inscription");
-        registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerButtonMouseClicked(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipady = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 20);
-        getContentPane().add(registerButton, gridBagConstraints);
 
         password.setText("jPasswordField1");
         password.setPreferredSize(new java.awt.Dimension(120, 18));
@@ -166,10 +148,6 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
 
-    private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
-        Register r = new Register();
-    }//GEN-LAST:event_registerButtonMouseClicked
-
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
         Requetes req = new Requetes();
         String username = this.username.getText();
@@ -207,7 +185,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JButton registerButton;
     private javax.swing.JTextField username;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables

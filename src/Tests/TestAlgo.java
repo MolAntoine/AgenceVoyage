@@ -34,18 +34,12 @@ public class TestAlgo {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         EntityManager em = emf.createEntityManager();
         AlgoGenetique g = new AlgoGenetique(em);
-        for(int i =0;i<3;i++){
-        int id1 = 1+random.nextInt(r.getNbGare(em));
-        int id2 = 1+random.nextInt(r.getNbGare(em));
-        while(id2 == id1){
-            id2 = 1+random.nextInt(r.getNbGare(em));
-        }
-        Gare g1 = r.getGareById(em,1);
-        Gare g2 = r.getGareById(em,2);
+        Gare g1 = r.getGareDepuisNom(em, "angers st. laud");
+        Gare g2 = r.getGareDepuisNom(em, "reims centre");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
-        Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
-       
-        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,5,0.9,0);
+        Date d2 = simpleDateFormat.parse("25:01:2023:07:00");
+        for(int i = 0;i<10;i++){
+        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,5,0,1);
         List<Troncon> troncons  =   tu.getTrajet();
         if(!troncons.isEmpty()){
             points++;

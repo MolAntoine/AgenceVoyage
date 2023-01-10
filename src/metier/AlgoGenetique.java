@@ -17,11 +17,12 @@ import modele.Troncon;
 
 
 public class AlgoGenetique {
-    private static final int pop_size = 1000;
+    private static final int pop_size = 8000;
     private final double mut_rate = 0.2; 
     private final int nb_loop = 100;
     private static final Random random = new Random();
     private List<Troncon> data;
+    private List<Troncon> dataGareDep;
     EntityManager em;
     Requetes re;
 
@@ -36,6 +37,15 @@ public class AlgoGenetique {
     public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep,int nbmaxch,double coeftemps,double coefcout) throws ParseException {
 
         data = re.getTronconsDate(em,dep);
+        dataGareDep = new ArrayList<>();
+        for(Troncon t : data){
+            if(t.getGareDepart().equals(depart)){
+                dataGareDep.add(t);
+            }
+        }
+        
+        
+        
         List<Individu> pop = new ArrayList<>(); 
         
         for(int i = 0;i<pop_size;i++){
@@ -57,7 +67,7 @@ public class AlgoGenetique {
        List<Individu> selection = selectionner(pop);
        List<Troncon> trs = new ArrayList<>();
        for(Individu ind : selection){
-       if(verifierTroncons(ind.getTr(),arrivee)){
+       if(verifierTroncons(ind.getTr(),arrivee,depart)){
        for(Troncon t : ind.getTr()){
            trs.add(t);
            if(t.getGareArrivee().equals(arrivee)){
@@ -159,7 +169,7 @@ private List<Individu> croiser(List<Individu> parents) {
            Troncon t = data.get(random.nextInt(data.size()));
            trs.add(t);
         }
-       trs.set(0,re.getTronconsDuTrain(em,depart).get(random.nextInt(re.getTronconsDuTrain(em,depart).size())));
+       trs.set(0,dataGareDep.get(random.nextInt(dataGareDep.size())));
        Individu t = new Individu(trs);
        return t;
     }
@@ -192,22 +202,25 @@ public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,
             score+=1000/(1+coeftemps*(troncon.getTimeDep()-timedep));
             score+=1000/(1+coefcout*troncon.getPrix());
             }
+            score+=1;
         }
         timedep += troncon.getTime();
         garePrec = troncon.getGareArrivee();
         visited.add(troncon.getGareArrivee());
     }
-    if(verifierTroncons(ind.getTr(),arrivee)){
-      score+=100;
+    if(verifierTroncons(ind.getTr(),arrivee,depart)){
+      score+=400;
     }
     return score;
 }  
 
 
-public boolean verifierTroncons(List<Troncon> troncons,Gare arrivee) {
+public boolean verifierTroncons(List<Troncon> troncons,Gare arrivee,Gare depart) {
     // Initialize a variable to keep track of the previous troncon
     Troncon prevTroncon = troncons.get(0);
-    
+    if(!prevTroncon.getGareDepart().equals(depart)){
+        return false;
+    }
     // Loop through the rest of the troncons in the list
     for (int i = 1; i < troncons.size(); i++) {
         Troncon currentTroncon = troncons.get(i);

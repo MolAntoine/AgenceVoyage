@@ -171,6 +171,7 @@ public class Login extends javax.swing.JFrame {
 
         for(char c : chars) passwd += c;
         
+        this.loginButton.setEnabled(false);
         if (username.isEmpty() || passwd.isEmpty()){
             JOptionPane.showMessageDialog(this, "Entrée invalide");
         }
@@ -185,7 +186,7 @@ public class Login extends javax.swing.JFrame {
                 this.failedLoginLabel.show();
                 if(!t.isRunning()) t.start();
                 else t.restart();
-                
+                this.loginButton.setEnabled(true);
             }
         }
         

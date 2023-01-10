@@ -75,7 +75,7 @@ public class Requetes {
         return query.getResultList();
     }
     public List<Troncon> getTronconsDate(EntityManager em,Date date) throws ParseException {
-        final String strQuery = "SELECT tr FROM Train tr WHERE tr.circ >= :date";
+        final String strQuery = "SELECT tr FROM Train tr WHERE tr.circ = :date";
         Query query = em.createQuery(strQuery);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

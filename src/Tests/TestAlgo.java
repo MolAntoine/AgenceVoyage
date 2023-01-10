@@ -46,12 +46,12 @@ public class TestAlgo {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
         Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
        
-        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,5,0,0.9);
+        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,5,0.9,0);
         List<Troncon> troncons  =   tu.getTrajet();
         if(!troncons.isEmpty()){
             points++;
             tu.calculate();
-            System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()));
+            System.out.println(String.valueOf(tu.getCout())+ " "+ String.valueOf(tu.getTemps()+tu.getTrajet().get(0).gettimedep()-420));
         }
         for(Troncon trs : troncons){
             System.out.println(trs.getGareDepart().getNom()+" "+Integer.toString(trs.gettimedep()) + "|" + trs.getGareArrivee().getNom()+" "+ Integer.toString(trs.gettimedep()+trs.gettime()));

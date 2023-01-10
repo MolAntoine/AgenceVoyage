@@ -16,7 +16,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import metier.Fichier;
 import metier.Individu;
-import metier.PlusCourtChemin;
 import metier.Requetes;
 import modele.Gare;
 import modele.TrajetUtilisateur;
@@ -33,35 +32,7 @@ public class TestReq {
         Fichier fTrajets = new Fichier("trajets_test.txt");
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         final EntityManager em = emf.createEntityManager();
-//        try{
-//            final EntityTransaction et = em.getTransaction();
-//            try{
-//                et.begin();
-//                
-//                fGares.traiterFicGares(em);
-//                
-//                et.commit();
-//                
-//                et.begin();
-//                
-//                fTrajets.traiterFicTrajets(em);
-//                
-//                et.commit();
-//            } catch (IOException ex) {
-//                et.rollback();
-//            } catch (ParseException ex) {
-//                Logger.getLogger(Test2.class.getName()).log(Level.SEVERE, null, ex);
-//                et.rollback();
-//            }
-//            
-//        } finally {
-//            if(em != null && em.isOpen()){
-//                em.close();
-//            }
-//            if(emf != null && emf.isOpen()){
-//                emf.close();
-//            }   
-//        }
+
         Gare g1 = r.getGareDepuisNom(em, "le mans");
         Gare g2 = r.getGareDepuisNom(em, "nancy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");

@@ -70,19 +70,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="registerButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Inscription"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerButtonMouseClicked"/>
-      </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="0" gridWidth="3" gridHeight="1" fill="0" ipadX="0" ipadY="2" insetsTop="20" insetsLeft="0" insetsBottom="0" insetsRight="20" anchor="12" weightX="0.1" weightY="0.1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JPasswordField" name="password">
       <Properties>
         <Property name="text" type="java.lang.String" value="jPasswordField1"/>

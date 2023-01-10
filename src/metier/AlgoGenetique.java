@@ -176,7 +176,7 @@ public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,
 
     
     
-    if(!ind.getTr().get(0).getGareDepart().equals(depart) || (timedep > ind.getTr().get(0).gettimedep())){
+    if(!ind.getTr().get(0).getGareDepart().equals(depart) || (timedep > ind.getTr().get(0).getTimeDep())){
         return 0;
     }
     
@@ -187,13 +187,13 @@ public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,
     for (Troncon troncon : ind.getTr()) {
         // Si la gare de départ du tronçon courant est la gare précédente, le tronçon est valide
         if(!visited.contains(troncon.getGareArrivee())){
-            if(troncon.getGareDepart().equals(garePrec) && troncon.gettimedep()>=timedep){
+            if(troncon.getGareDepart().equals(garePrec) && troncon.getTimeDep()>=timedep){
 
-            score+=1000/(1+coeftemps*(troncon.gettimedep()-timedep));
+            score+=1000/(1+coeftemps*(troncon.getTimeDep()-timedep));
             score+=1000/(1+coefcout*troncon.getPrix());
             }
         }
-        timedep += troncon.gettime();
+        timedep += troncon.getTime();
         garePrec = troncon.getGareArrivee();
         visited.add(troncon.getGareArrivee());
     }

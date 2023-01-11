@@ -1,6 +1,7 @@
 
 package metier;
 import static java.lang.Math.abs;
+import static java.lang.Math.log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ import modele.Troncon;
 
 public class AlgoGenetique {
     private static final int pop_size = 8000;
-    private final double mut_rate = 0.2; 
-    private final int nb_loop = 100;
+    private final double mut_rate = 0.1; 
+    private final int nb_loop = 80;
     private static final Random random = new Random();
     private List<Troncon> data;
     private List<Troncon> dataGareDep;
@@ -28,7 +29,7 @@ public class AlgoGenetique {
 
     public AlgoGenetique(EntityManager em) {
         this.em = em;
-        re = new Requetes();
+        re = new Requetes(em);
      
     }
     
@@ -36,7 +37,7 @@ public class AlgoGenetique {
 
     public TrajetUtilisateur trouverCheminCourt(Gare depart, Gare arrivee, Date dep,int nbmaxch,double coeftemps,double coefcout) throws ParseException {
 
-        data = re.getTronconsDate(em,dep);
+        data = re.getTronconsDate(dep);
         dataGareDep = new ArrayList<>();
         for(Troncon t : data){
             if(t.getGareDepart().equals(depart)){
@@ -56,13 +57,17 @@ public class AlgoGenetique {
         // Évaluation de la population
         for (Individu ind : pop) {
             ind.setFitness(evaluerIndividu(ind, depart, arrivee, dep,coeftemps,coefcout));
-           // System.out.println(String.valueOf(ind.getFitness()));
+          
         };
+       
         // Sélection des individus les plus aptes
         // Croisement des individus sélectionnés pour créer une nouvelle génération
         // Mutation de quelques individus de la nouvelle génération
         // Remplacement de la population par la nouvelle génération
-        pop = muter(croiser(selectionner(pop)));        
+        pop = selectionner(pop);
+        System.out.println(String.valueOf(pop.get(0).getFitness())); 
+        pop = croiser(pop);
+        pop = muter(pop);        
     }
        List<Individu> selection = selectionner(pop);
        List<Troncon> trs = new ArrayList<>();
@@ -125,12 +130,14 @@ private List<Individu> croiser(List<Individu> parents) {
          for(Individu ind : input){
              List<Troncon> ttemp = new ArrayList<>();
              for(Troncon t : ind.getTr()){
-                 if(random.nextInt()%(int)(1.0/mut_rate) == 0){
+                 
+                 if((random.nextInt()%(int)(1.0/mut_rate)) == 0){
                    ttemp.add(data.get(random.nextInt(data.size())));
                  }
                  else{
                      ttemp.add(t);
                  }
+                 
              }
              Individu temp = new Individu(ttemp);
              output.add(temp);
@@ -186,7 +193,7 @@ public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,
 
     
     
-    if(!ind.getTr().get(0).getGareDepart().equals(depart) || (timedep > ind.getTr().get(0).getTimeDep())){
+    if(!ind.getTr().get(0).getGareDepart().equals(depart)){
         return 0;
     }
     
@@ -197,20 +204,26 @@ public double evaluerIndividu(Individu ind, Gare depart, Gare arrivee, Date dep,
     for (Troncon troncon : ind.getTr()) {
         // Si la gare de départ du tronçon courant est la gare précédente, le tronçon est valide
         if(!visited.contains(troncon.getGareArrivee())){
-            if(troncon.getGareDepart().equals(garePrec) && troncon.getTimeDep()>=timedep){
-
-            score+=1000/(1+coeftemps*(troncon.getTimeDep()-timedep));
-            score+=1000/(1+coefcout*troncon.getPrix());
+            if(troncon.getGareDepart().equals(garePrec)){
+                score+=5;
+                if(troncon.getTimeDep()>=timedep){
+                    score+=1;
+                    score+=coeftemps*10/(1.0+((double)troncon.getTimeDep()-(double)timedep));
+                    score+=coefcout*10/(1.0+(double)troncon.getPrix());
+                        if(troncon.getGareArrivee().equals(arrivee)){
+                            score+=60;
+                        }
             }
-            score+=1;
         }
+        }
+        else{
+                    score-=10;
+                }
         timedep += troncon.getTime();
         garePrec = troncon.getGareArrivee();
         visited.add(troncon.getGareArrivee());
-    }
-    if(verifierTroncons(ind.getTr(),arrivee,depart)){
-      score+=400;
-    }
+    }  
+    
     return score;
 }  
 

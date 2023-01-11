@@ -167,10 +167,10 @@ public class Fichier {
     //fait la requête de toutes les gares et les met dans un HashMap 
     //pour éviter de faire des requêtes à la bdd dans une boucle
     private Map<String,Gare> getMapGares(EntityManager em){
-        Requetes r = new Requetes();
+        Requetes r = new Requetes(em);
         
         Map<String,Gare> mg = new HashMap<>();
-        List<Gare> resList = r.getGares(em);
+        List<Gare> resList = r.getGares();
         for(Gare g : resList){
             mg.put(g.getNom(), g);
         }

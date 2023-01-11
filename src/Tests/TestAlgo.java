@@ -30,16 +30,22 @@ public class TestAlgo {
     
     public static int testGenetique() throws ParseException{
         int points = 0;
-        Requetes r = new Requetes();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgenceVoyagePU");
         EntityManager em = emf.createEntityManager();
+        Requetes r = new Requetes(em);
         AlgoGenetique g = new AlgoGenetique(em);
-        Gare g1 = r.getGareDepuisNom(em, "angers st. laud");
-        Gare g2 = r.getGareDepuisNom(em, "reims centre");
+        
+        
+        List<Gare> gares = r.getGares();
+        
+        for(int i =0;i<10;i++){
+        //Gare g1 =  r.getGareDepuisNom("lille europe");
+        Gare g1 = r.getGareById(1);
+        //Gare g2 =  r.getGareDepuisNom("lyon part dieu");
+        Gare g2 = r.getGareById(3);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
-        Date d2 = simpleDateFormat.parse("25:01:2023:07:00");
-        for(int i = 0;i<10;i++){
-        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,5,0,1);
+        Date d2 = simpleDateFormat.parse("01:01:2023:07:00");
+        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,6,0.5,0);
         List<Troncon> troncons  =   tu.getTrajet();
         if(!troncons.isEmpty()){
             points++;

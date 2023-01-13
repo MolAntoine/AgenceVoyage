@@ -34,18 +34,18 @@ public class TestAlgo {
         EntityManager em = emf.createEntityManager();
         Requetes r = new Requetes(em);
         AlgoGenetique g = new AlgoGenetique(em);
-        for(int i =0;i<3;i++){
-        int id1 = 1+random.nextInt(r.getNbGare());
-        int id2 = 1+random.nextInt(r.getNbGare());
-        while(id2 == id1){
-            id2 = 1+random.nextInt(r.getNbGare());
-        }
+        
+        
+        List<Gare> gares = r.getGares();
+        
+        for(int i =0;i<10;i++){
+        //Gare g1 =  r.getGareDepuisNom("lille europe");
         Gare g1 = r.getGareById(1);
-        Gare g2 = r.getGareById(2);
+        //Gare g2 =  r.getGareDepuisNom("lyon part dieu");
+        Gare g2 = r.getGareById(3);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
-        Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
-       
-        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,5,0.9,0);
+        Date d2 = simpleDateFormat.parse("01:01:2023:07:00");
+        TrajetUtilisateur tu = g.trouverCheminCourt(g1, g2, d2,6,0.5,0);
         List<Troncon> troncons  =   tu.getTrajet();
         if(!troncons.isEmpty()){
             points++;

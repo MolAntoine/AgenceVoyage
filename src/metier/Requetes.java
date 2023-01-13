@@ -5,16 +5,23 @@
  */
 package metier;
 
+import Tests.Test2;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import modele.Gare;
 import modele.Train;
+import modele.TrajetUtilisateur;
 import modele.Troncon;
+import modele.Utilisateur;
 
 /**
  *
@@ -90,7 +97,8 @@ public class Requetes {
         query.setParameter("date", formattedDate);
                
         List<Troncon> trs = new ArrayList<Troncon>();
-        for(Train tr : (List<Train>)query.getResultList()){
+        List<Train> trains = (List<Train>)query.getResultList();
+        for(Train tr : trains){
             for(Troncon t : tr.getTrajet()){
                 if(t.getHeureDepart().after(formattedTime)){
                     trs.add(t);
@@ -120,6 +128,13 @@ public class Requetes {
         
         
         return !(query.getResultList().isEmpty());
+    }
+    public void addUtilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin){
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        Utilisateur u = new Utilisateur(login,mdp,nom,prenom,adresse,naissance,admin);
+        em.persist(u);
+        et.commit();
     }
     
 }

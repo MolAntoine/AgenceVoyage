@@ -60,6 +60,15 @@ public class Utilisateur implements Serializable {
         this.admin = admin;
         this.trajetsUser = trajetsUser;
     }
+        public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin) {
+        this.login = login;
+        this.mdp = mdp;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.naissance = naissance;
+        this.admin = admin;
+    }
     
     public Utilisateur() {
     }

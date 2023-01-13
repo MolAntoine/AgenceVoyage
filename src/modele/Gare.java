@@ -88,10 +88,10 @@ public class Gare implements Serializable {
         }
         return true;
     }
-
+   
     @Override
     public String toString() {
-        return "Gare{" + "id=" + id + ", nom=" + nom + ", ville=" + ville + ", codepost=" + codepost + ", lat=" + lat + ", lng=" + lng + '}';
+        return nom;
     }
 
 

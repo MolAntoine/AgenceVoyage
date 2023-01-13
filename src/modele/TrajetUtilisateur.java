@@ -108,7 +108,7 @@ public class TrajetUtilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "TrajetUtilisateur{" + "cout=" + cout + ", temps=" + temps + ", trajet=" + trajet + '}';
+        return "Prix: " + cout + ",Durée(min): " + temps + ", trajet=" + trajet + '}';
     }
 
     public List<Troncon> getTrajet() {

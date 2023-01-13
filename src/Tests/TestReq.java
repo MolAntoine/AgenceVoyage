@@ -5,10 +5,8 @@
  */
 package Tests;
 
-import metier.AlgoGenetique;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,7 +16,6 @@ import metier.Fichier;
 import metier.Individu;
 import metier.Requetes;
 import modele.Gare;
-import modele.TrajetUtilisateur;
 import modele.Troncon;
 
 /**
@@ -38,6 +35,10 @@ public class TestReq {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
         Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
         List<Troncon> tr = r.getTronconsDate(d2);
+        SimpleDateFormat simpleDateFormatnaissance = new SimpleDateFormat("dd/MM/yyyy");
+        Date naissance = simpleDateFormatnaissance.parse("05/11/2002");
+        r.addUtilisateur("test","test","Gressier","Louis","ceci est une adresse",naissance, Boolean.TRUE);
+        
         
     }
 }

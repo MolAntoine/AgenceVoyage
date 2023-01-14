@@ -118,7 +118,7 @@ public class Requetes {
     }
 
 
-    public boolean checkUtilisateur(String login, String mdp) {
+    public Utilisateur checkUtilisateur(String login, String mdp) {
         final String strQuery = "SELECT u from Utilisateur u "
                                 + "WHERE u.login = :login "
                                 + "AND u.mdp = :mdp";
@@ -126,13 +126,12 @@ public class Requetes {
         query.setParameter("login",login);
         query.setParameter("mdp",mdp);
         
-        
-        return !(query.getResultList().isEmpty());
+        if (query.getResultList().isEmpty()) return null;
+        else return (Utilisateur) query.getSingleResult();
     }
-    public void addUtilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin){
+    public void addUtilisateur(Utilisateur u){
         EntityTransaction et = em.getTransaction();
         et.begin();
-        Utilisateur u = new Utilisateur(login,mdp,nom,prenom,adresse,naissance,admin);
         em.persist(u);
         et.commit();
     }

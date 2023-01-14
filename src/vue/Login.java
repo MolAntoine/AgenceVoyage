@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import metier.Requetes;
+import modele.Utilisateur;
 
 
 
@@ -70,6 +71,11 @@ public class Login extends javax.swing.JFrame {
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginButtonMouseClicked(evt);
+            }
+        });
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -141,7 +147,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_loginActionPerformed
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
         // TODO add your handling code here:
@@ -151,7 +157,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
-        String username = this.username.getText();
+        
+        
+    }//GEN-LAST:event_loginButtonMouseClicked
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+                String username = this.username.getText();
         String passwd= "";
         char[] chars =this.password.getPassword();
         
@@ -174,11 +185,13 @@ public class Login extends javax.swing.JFrame {
         this.loginButton.setEnabled(false);
         if (username.isEmpty() || passwd.isEmpty()){
             JOptionPane.showMessageDialog(this, "Entrée invalide");
+            this.loginButton.setEnabled(true);
         }
         else {
-            if(req.checkUtilisateur(username, passwd)){
+            Utilisateur u = req.checkUtilisateur(username, passwd);
+            if(u!=null){
                 //connexion OK
-                Application a = new Application(em, username, passwd);
+                Application a = new Application(em, u);
                 this.setVisible(false);
             }
             else{
@@ -189,8 +202,7 @@ public class Login extends javax.swing.JFrame {
                 this.loginButton.setEnabled(true);
             }
         }
-        
-    }//GEN-LAST:event_loginButtonMouseClicked
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     public static void main(String args[]) {
         Login l = new Login();

@@ -13,10 +13,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import metier.Fichier;
-import metier.Individu;
 import metier.Requetes;
 import modele.Gare;
 import modele.Troncon;
+import modele.Utilisateur;
 
 /**
  *
@@ -37,7 +37,8 @@ public class TestReq {
         List<Troncon> tr = r.getTronconsDate(d2);
         SimpleDateFormat simpleDateFormatnaissance = new SimpleDateFormat("dd/MM/yyyy");
         Date naissance = simpleDateFormatnaissance.parse("05/11/2002");
-        r.addUtilisateur("test","test","Gressier","Louis","ceci est une adresse",naissance, Boolean.TRUE);
+        Utilisateur u = new Utilisateur("test","test","Gressier","Louis","ceci est une adresse",naissance, true,null);
+        r.addUtilisateur(u);
         
         
     }

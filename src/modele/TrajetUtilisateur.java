@@ -6,23 +6,14 @@
 package modele;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import metier.Requetes;
 
 /**
  *
@@ -87,7 +78,6 @@ public class TrajetUtilisateur implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof TrajetUtilisateur)) {
             return false;
         }
@@ -106,14 +96,13 @@ public class TrajetUtilisateur implements Serializable {
         return temps;
     }
 
-    @Override
-    public String toString() {
-        return "Prix: " + cout + ",Durée(min): " + temps + ", trajet=" + trajet + '}';
-    }
-
     public List<Troncon> getTrajet() {
         return trajet;
     }
-
     
+    @Override
+    public String toString() {
+        if(trajet.isEmpty()) return "Aucun trajet ne correspond";
+        return "Prix: " + cout + " €, Durée: " + temps + " min\n";
+    }
 }

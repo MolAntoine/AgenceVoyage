@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.swing.ImageIcon;
 import modele.Gare;
 import modele.Train;
 import modele.Troncon;
@@ -162,6 +163,17 @@ public class Fichier {
             line = reader.readLine();
             if(line!= null) args = line.split("\t");
         }   
+    }
+    
+    //Retourne une ImageIcon, ou null si le nomFichier est invalide.
+    public ImageIcon creerImageIcon() {
+        java.net.URL imgURL = getClass().getResource(nomFichier);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Impossible de trouver le fichier : " + nomFichier);
+            return null;
+        }
     }
 
     //fait la requête de toutes les gares et les met dans un HashMap 

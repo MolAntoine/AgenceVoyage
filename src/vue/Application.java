@@ -533,7 +533,7 @@ public class Application extends javax.swing.JFrame {
 //                tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,6,1-svalue,svalue);
 //            }
             for(int i =0;i<10;i++){
-                tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,6,1-svalue,svalue);
+                tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,9,1-svalue,svalue);
                 if(tr!=null && !tr.getTrajet().isEmpty()){
                     tr.calculate();
                     ajoutTrajet(root,tr);

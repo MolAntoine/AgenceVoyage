@@ -94,6 +94,14 @@ public class Gare implements Serializable {
         return nom;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
 
 
 

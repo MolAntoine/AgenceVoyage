@@ -15,6 +15,7 @@ import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.SwingWorker;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -527,20 +528,29 @@ public class Application extends javax.swing.JFrame {
             double svalue = ((double)sliderParam.getValue())/((double)sliderParam.getMaximum()-(double)sliderParam.getMinimum());
             System.out.println(String.valueOf(svalue));
             
-            TrajetUtilisateur tr = null;
-            TrajetUtilisateur trAux = null;
-//            while(tr == null || tr.getTrajet().isEmpty()) {
-//                tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,6,1-svalue,svalue);
-//            }
-            for(int i =0;i<10;i++){
-                tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,9,1-svalue,svalue);
-                if(tr!=null && !tr.getTrajet().isEmpty()){
-                    tr.calculate();
-                    ajoutTrajet(root,tr);
-                    treeModel.reload();
-                    trAux = tr;
-                }
+
+            SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                TrajetUtilisateur tr = null;
+                TrajetUtilisateur trAux = null;
+                List<TrajetUtilisateur> trajets = new ArrayList<>();
+                while(true) {
+                    tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,9,1-svalue,svalue);
+                        if(tr!=null && !tr.getTrajet().isEmpty()){
+                            if(!trajets.contains(tr)){
+                            tr.calculate();
+                            ajoutTrajet(root,tr);
+                            treeModel.reload();
+                            trAux = tr;
+                            trajets.add(tr);
+                            }
+                        }
+                    }
+            return null;
             }
+            };
+worker.execute();
             
         
            

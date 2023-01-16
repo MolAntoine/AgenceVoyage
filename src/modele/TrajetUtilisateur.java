@@ -88,8 +88,8 @@ public class TrajetUtilisateur implements Serializable {
         return true;
     }
 
-    public double getCout() {
-        return cout;
+    public int getCout() {
+        return (int)cout;
     }
 
     public int getTemps() {

@@ -136,5 +136,13 @@ public class Requetes {
         em.persist(u);
         et.commit();
     }
+    public List<TrajetUtilisateur> getTrajetUtilisateur(Utilisateur u){
+        final String strQuery = "SELECT u.trajetsUser from Utilisateur u"
+                                + " WHERE u = :u";
+        
+        Query query = em.createQuery(strQuery);
+        query.setParameter("u", u);
+        return query.getResultList();
+    }
     
 }

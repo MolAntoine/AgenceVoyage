@@ -53,7 +53,7 @@ public class Test1 {
                 Utilisateur u = new Utilisateur("1234", "mdp","jean", "kevin", "123 RUE JSP",tdate, false,ltu);
                
                 em.persist(tr);
-                em.persist(u);
+                //em.persist(u);
                 et.commit();
                 } catch (Exception ex) {
                 et.rollback();

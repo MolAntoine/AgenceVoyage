@@ -153,9 +153,9 @@ public class Application extends javax.swing.JFrame {
         adminPage = new javax.swing.JPanel();
         listeTrajets = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        mesTrajets = new javax.swing.JTree();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        supMestrajets = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 800, 480));
@@ -422,14 +422,14 @@ public class Application extends javax.swing.JFrame {
         listeTrajets.setMinimumSize(new java.awt.Dimension(800, 450));
         listeTrajets.setPreferredSize(new java.awt.Dimension(800, 450));
 
-        jScrollPane1.setViewportView(jTree1);
+        jScrollPane1.setViewportView(mesTrajets);
 
         jLabel8.setText("Vos Trajets: ");
 
-        jButton1.setText("Supprimer Selection");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        supMestrajets.setText("Supprimer Selection");
+        supMestrajets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                supMestrajetsActionPerformed(evt);
             }
         });
 
@@ -443,7 +443,7 @@ public class Application extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(supMestrajets, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(listeTrajetsLayout.createSequentialGroup()
                         .addGap(348, 348, 348)
                         .addComponent(jLabel8)))
@@ -457,7 +457,7 @@ public class Application extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(listeTrajetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(supMestrajets, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
 
@@ -659,6 +659,22 @@ public class Application extends javax.swing.JFrame {
 
     private void reviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewButtonActionPerformed
         // TODO add your handling code here:
+       
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Trajets"); 
+        DefaultTreeModel treeModel = new DefaultTreeModel(root);
+        mesTrajets.setModel(treeModel);
+        
+        homePage.setVisible(false);
+        listeTrajets.setVisible(true);
+        Requetes r = new Requetes(em);
+        List<TrajetUtilisateur> trs = new ArrayList<>();
+        trs = r.getTrajetUtilisateur(user);
+        if(trs.get(0)!=null){
+            for(TrajetUtilisateur tr : trs){
+                
+            }
+        }
+        return;
     }//GEN-LAST:event_reviewButtonActionPerformed
 
     private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
@@ -670,9 +686,9 @@ public class Application extends javax.swing.JFrame {
          searching = false;
     }//GEN-LAST:event_arretRechActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void supMestrajetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supMestrajetsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_supMestrajetsActionPerformed
 
     public static void main(String args[]) {   
         Application a = new Application(true);
@@ -691,7 +707,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> gareDepart;
     private javax.swing.JFormattedTextField heureDepart;
     private javax.swing.JPanel homePage;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -703,8 +718,8 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTree jTree1;
     private javax.swing.JPanel listeTrajets;
+    private javax.swing.JTree mesTrajets;
     private javax.swing.JButton recherche;
     private javax.swing.JTree rechercheList;
     private javax.swing.JPanel rechercheTrajet;
@@ -712,5 +727,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JButton sauvRech;
     private javax.swing.JButton searchButton;
     private javax.swing.JSlider sliderParam;
+    private javax.swing.JButton supMestrajets;
     // End of variables declaration//GEN-END:variables
 }

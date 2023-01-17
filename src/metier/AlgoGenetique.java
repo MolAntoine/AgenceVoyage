@@ -40,12 +40,8 @@ public class AlgoGenetique {
         data = re.getTronconsDate(dep);
         dataGareDep = new ArrayList<>();
         for(Troncon t : data){
-            if(t.getGareDepart().equals(depart)){
-                dataGareDep.add(t);
-            }
+            if(t.getGareDepart().equals(depart)) dataGareDep.add(t);
         }
-        
-        
         
         List<Individu> pop = new ArrayList<>(); 
         
@@ -54,33 +50,32 @@ public class AlgoGenetique {
         }
         
         for (int i = 0; i < nb_loop; i++) {
-        // Évaluation de la population
-        for (Individu ind : pop) {
-            ind.setFitness(evaluerIndividu(ind, depart, arrivee, dep,coeftemps,coefcout));
-          
-        };
-       
-        // Sélection des individus les plus aptes
-        // Croisement des individus sélectionnés pour créer une nouvelle génération
-        // Mutation de quelques individus de la nouvelle génération
-        // Remplacement de la population par la nouvelle génération
-        pop = selectionner(pop);
-        System.out.println(String.valueOf(pop.get(0).getFitness())); 
-        pop = croiser(pop);
-        pop = muter(pop,depart);        
-    }
-       List<Individu> selection = selectionner(pop);
-       List<Troncon> trs = new ArrayList<>();
-       for(Individu ind : selection){
-       if(verifierTroncons(ind.getTr(),arrivee,depart)){
-       for(Troncon t : ind.getTr()){
-           trs.add(t);
-           if(t.getGareArrivee().equals(arrivee)){
-               break;
-           }
-       }
-       break;
-       }
+            // Évaluation de la population
+            
+            for (Individu ind : pop) {
+                ind.setFitness(evaluerIndividu(ind, depart, arrivee, dep,coeftemps,coefcout));
+            }
+
+            // Sélection des individus les plus aptes
+            // Croisement des individus sélectionnés pour créer une nouvelle génération
+            // Mutation de quelques individus de la nouvelle génération
+            // Remplacement de la population par la nouvelle génération
+            pop = selectionner(pop);
+            System.out.println(String.valueOf(pop.get(0).getFitness())); 
+            pop = croiser(pop);
+            pop = muter(pop,depart);        
+        }
+        
+        List<Individu> selection = selectionner(pop);
+        List<Troncon> trs = new ArrayList<>();
+        for(Individu ind : selection){
+        if(verifierTroncons(ind.getTr(),arrivee,depart)){
+            for(Troncon t : ind.getTr()){
+                trs.add(t);
+                if(t.getGareArrivee().equals(arrivee)) break;
+            }
+            break;
+        }
        }
       TrajetUtilisateur trajet = new TrajetUtilisateur(trs);
       return trajet;

@@ -15,14 +15,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingWorker;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 import metier.*;
 import modele.*;
 
@@ -91,6 +93,15 @@ public class Application extends javax.swing.JFrame {
         rechercheList.setShowsRootHandles(true);
         rechercheList.setModel(null);
         
+        rechercheList.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        rechercheList.addTreeSelectionListener(new TreeSelectionListener(){
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+               DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)rechercheList.getLastSelectedPathComponent();   
+               if(selectedNode == null || selectedNode.isLeaf()) rechercheList.clearSelection();
+              }
+        });
+        
         ImageIcon leafIcon = f1.creerImageIcon();
         ImageIcon nodeIcon = f2.creerImageIcon();
         DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
@@ -111,6 +122,7 @@ public class Application extends javax.swing.JFrame {
         top.add(trajet);
 
         gare = new DefaultMutableTreeNode(tr.getTrajet().get(0).getGareDepart().getNom() + "   Départ : " + tr.getTrajet().get(0).getHeureDepart());
+      
         trajet.add(gare);   
         
         for(Troncon t : tr.getTrajet()){
@@ -175,11 +187,6 @@ public class Application extends javax.swing.JFrame {
         searchButton.setMinimumSize(new java.awt.Dimension(200, 200));
         searchButton.setPreferredSize(new java.awt.Dimension(200, 200));
         searchButton.setRequestFocusEnabled(false);
-        searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchButtonMouseClicked(evt);
-            }
-        });
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -304,7 +311,6 @@ public class Application extends javax.swing.JFrame {
                 heureDepartActionPerformed(evt);
             }
         });
-
         jScrollPane3.setViewportView(rechercheList);
 
         arretRech.setText("Arret Recherche");
@@ -343,23 +349,26 @@ public class Application extends javax.swing.JFrame {
                     .addComponent(recherche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(rechercheTrajetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(rechercheTrajetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(rechercheTrajetLayout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addComponent(jScrollPane3)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rechercheTrajetLayout.createSequentialGroup()
-                            .addGap(0, 229, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkPrix)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(checkDuree)))
+                    .addGroup(rechercheTrajetLayout.createSequentialGroup()
+                        .addGroup(rechercheTrajetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rechercheTrajetLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(checkPrix)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(checkDuree))
+                            .addGroup(rechercheTrajetLayout.createSequentialGroup()
+                                .addGroup(rechercheTrajetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(64, 64, 64))
                     .addGroup(rechercheTrajetLayout.createSequentialGroup()
                         .addComponent(arretRech, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sauvRech, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         rechercheTrajetLayout.setVerticalGroup(
             rechercheTrajetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,6 +529,7 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_gareDepartActionPerformed
 
     private void rechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheActionPerformed
+        this.rechercheTrajet.setEnabled(false);
         try {
             searching = true;
             DefaultMutableTreeNode root = new DefaultMutableTreeNode("Trajets");
@@ -546,6 +556,12 @@ public class Application extends javax.swing.JFrame {
             SimpleDateFormat finalFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
             Date finalDate = finalFormat.parse(finalFormat.format(dateCalendar.getTime()));
             double svalue = ((double)sliderParam.getValue())/((double)sliderParam.getMaximum()-(double)sliderParam.getMinimum());
+            
+            
+            
+            Gare gDepart = (Gare)gareDepart.getSelectedItem();
+            Gare gArrivee = (Gare)gareArrivee.getSelectedItem();
+            
             System.out.println(String.valueOf(svalue));
             
 
@@ -555,7 +571,7 @@ public class Application extends javax.swing.JFrame {
                 TrajetUtilisateur tr = null;
                 List<TrajetUtilisateur> trajets = new ArrayList<>();
                 while(searching) {
-                    tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,9,1-svalue,svalue);
+                    tr = algo.trouverCheminCourt(gDepart,gArrivee, date,9,1-svalue,svalue);
                         if(tr!=null && !tr.getTrajet().isEmpty()){
                             tr.calculate();
                             trajets.add(tr);
@@ -577,6 +593,7 @@ public class Application extends javax.swing.JFrame {
                         }
                         treeModel.reload();
                     }
+                rechercheTrajet.setVisible(true);
                 return null;
             }
             };
@@ -587,6 +604,7 @@ public class Application extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_rechercheActionPerformed
 
     private void dateDepartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateDepartActionPerformed
@@ -620,14 +638,11 @@ public class Application extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_reviewButtonActionPerformed
 
-    private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
-        
-    }//GEN-LAST:event_searchButtonMouseClicked
-
     private void arretRechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arretRechActionPerformed
         // TODO add your handling code here:
          searching = false;
     }//GEN-LAST:event_arretRechActionPerformed
+
 
     public static void main(String args[]) {   
         Application a = new Application(true);

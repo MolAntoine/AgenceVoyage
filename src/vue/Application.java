@@ -671,7 +671,7 @@ public class Application extends javax.swing.JFrame {
         trs = r.getTrajetUtilisateur(user);
         if(trs.get(0)!=null){
             for(TrajetUtilisateur tr : trs){
-                
+                ajoutTrajet(root,tr);
             }
         }
         return;

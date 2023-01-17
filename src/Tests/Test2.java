@@ -7,6 +7,10 @@ package Tests;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -14,6 +18,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import metier.Fichier;
+import metier.Requetes;
+import modele.TrajetUtilisateur;
+import modele.Troncon;
+import modele.Utilisateur;
 
 /**
  *
@@ -41,6 +49,21 @@ public class Test2 {
                 fTrajets.traiterFicTrajets(em);
                 
                 et.commit();
+                
+                et.begin();
+                Requetes r = new Requetes(em);
+                SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+                Date tdate = simpleDateFormat2.parse("05/11/2022");
+                List<TrajetUtilisateur> trajetsUser = new ArrayList<>();
+                List<Troncon> trs = new ArrayList<>();
+                trs.add(r.getTronconById(1));
+                trajetsUser.add(new TrajetUtilisateur());
+                
+                Utilisateur u = new Utilisateur("test","test","test","test","test",tdate,true,trajetsUser);
+                em.persist(u);
+                et.commit();
+                
+                
             } catch (IOException ex) {
                 et.rollback();
             } catch (ParseException ex) {

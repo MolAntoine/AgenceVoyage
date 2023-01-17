@@ -1,0 +1,23 @@
+NbGares	22
+angers st. laud	angers	49000	47.468700	-0.558810
+avignon tgv	avignon	84000	43.9492493	4.8059012
+bordeaux st jean	bordeaux	33000	44.837788	-0.579180
+dijon ville	dijon	21000	47.322048	5.041480
+grenoble	grenoble	38000	45.194260	5.731670
+le mans	le mans	72000	48.0073849	0.1967849
+lille europe	lille	59000	50.6365654	3.0635282
+lyon part dieu	lyon	69000	45.7578137	4.8320114
+marseille st. charles	marseille	13000	43.2961743	5.3699525
+metz ville	metz	57000	49.1196964	6.1763552
+montpellier saint roch	montpellier	05600	43.610769	3.876716
+nancy	nancy	54000	48.6937223	6.1834097
+nantes	nantes	44000	47.2186371	-1.5541362
+nice ville	nice	06000	43.710175	7.261953
+paris nord	paris	75000	48.8588897	2.320041
+poitiers	poitiers	86000	46.5802596	0.340196
+reims centre	reims	51000	49.2577886	4.031926
+rennes	rennes	35000	48.1113387	-1.6800198
+saint etienne	saint etienne	42000	45.4401467	4.3873058
+toulon	toulon	83000	43.1257311	5.9304919
+toulouse matabiau	toulouse	31000	43.6044622	1.4442469
+tours	tours	37000	47.3900474	0.6889268

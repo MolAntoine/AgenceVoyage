@@ -93,7 +93,7 @@ public class Requetes {
         
         Date formattedDate = dateFormat.parse(dateFormat.format(date));
         Date formattedTime = timeFormat.parse(timeFormat.format(date));
-              
+        
         query.setParameter("date", formattedDate);
                
         List<Troncon> trs = new ArrayList<Troncon>();
@@ -106,6 +106,7 @@ public class Requetes {
             }
             
         }
+        System.out.println(trs.size());
         return trs;
     }
     public List<Troncon> getTronconsDuTrain(Gare gare){

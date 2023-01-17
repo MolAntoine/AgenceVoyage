@@ -243,7 +243,7 @@ public boolean verifierTroncons(List<Troncon> troncons,Gare arrivee,Gare depart)
     Troncon prevTroncon = troncons.get(0);
     if(!prevTroncon.getGareDepart().equals(depart)){
         return false;
-    }
+    }   
     // Loop through the rest of the troncons in the list
     for (int i = 1; i < troncons.size(); i++) {
         Troncon currentTroncon = troncons.get(i);

@@ -152,6 +152,10 @@ public class Application extends javax.swing.JFrame {
         sauvRech = new javax.swing.JButton();
         adminPage = new javax.swing.JPanel();
         listeTrajets = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 800, 480));
@@ -417,7 +421,45 @@ public class Application extends javax.swing.JFrame {
         listeTrajets.setMaximumSize(new java.awt.Dimension(1120, 630));
         listeTrajets.setMinimumSize(new java.awt.Dimension(800, 450));
         listeTrajets.setPreferredSize(new java.awt.Dimension(800, 450));
-        listeTrajets.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane1.setViewportView(jTree1);
+
+        jLabel8.setText("Vos Trajets: ");
+
+        jButton1.setText("Supprimer Selection");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout listeTrajetsLayout = new javax.swing.GroupLayout(listeTrajets);
+        listeTrajets.setLayout(listeTrajetsLayout);
+        listeTrajetsLayout.setHorizontalGroup(
+            listeTrajetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listeTrajetsLayout.createSequentialGroup()
+                .addGroup(listeTrajetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(listeTrajetsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(listeTrajetsLayout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(jLabel8)))
+                .addContainerGap(178, Short.MAX_VALUE))
+        );
+        listeTrajetsLayout.setVerticalGroup(
+            listeTrajetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listeTrajetsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(listeTrajetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
+        );
 
         jLayeredPane1.setLayer(homePage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(rechercheTrajet, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -546,7 +588,6 @@ public class Application extends javax.swing.JFrame {
             SimpleDateFormat finalFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
             Date finalDate = finalFormat.parse(finalFormat.format(dateCalendar.getTime()));
             double svalue = ((double)sliderParam.getValue())/((double)sliderParam.getMaximum()-(double)sliderParam.getMinimum());
-            System.out.println(String.valueOf(svalue));
             
 
             SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
@@ -555,7 +596,7 @@ public class Application extends javax.swing.JFrame {
                 TrajetUtilisateur tr = null;
                 List<TrajetUtilisateur> trajets = new ArrayList<>();
                 while(searching) {
-                    tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), date,9,1-svalue,svalue);
+                    tr = algo.trouverCheminCourt((Gare)gareDepart.getSelectedItem(),(Gare)gareArrivee.getSelectedItem(), finalDate,9,1-svalue,svalue);
                         if(tr!=null && !tr.getTrajet().isEmpty()){
                             tr.calculate();
                             trajets.add(tr);
@@ -629,6 +670,10 @@ public class Application extends javax.swing.JFrame {
          searching = false;
     }//GEN-LAST:event_arretRechActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {   
         Application a = new Application(true);
     }
@@ -646,6 +691,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> gareDepart;
     private javax.swing.JFormattedTextField heureDepart;
     private javax.swing.JPanel homePage;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -653,8 +699,11 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTree jTree1;
     private javax.swing.JPanel listeTrajets;
     private javax.swing.JButton recherche;
     private javax.swing.JTree rechercheList;

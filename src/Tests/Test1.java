@@ -50,7 +50,7 @@ public class Test1 {
                 tU.calculate();
                 List<TrajetUtilisateur> ltu = new ArrayList<>();
                 ltu.add(tU);
-                Utilisateur u = new Utilisateur("1234", "mdp","jean", "kevin", "123 RUE JSP",tdate, true,ltu);
+                Utilisateur u = new Utilisateur("1234", "mdp","jean", "kevin", "123 RUE JSP",tdate, false,ltu);
                
                 em.persist(tr);
                 em.persist(u);

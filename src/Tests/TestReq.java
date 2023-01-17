@@ -33,7 +33,7 @@ public class TestReq {
         Gare g1 = r.getGareDepuisNom("le mans");
         Gare g2 = r.getGareDepuisNom("nancy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
-        Date d2 = simpleDateFormat.parse("22:11:2022:07:00");
+        Date d2 = simpleDateFormat.parse("22:11:2022:15:00");
         List<Troncon> tr = r.getTronconsDate(d2);
         SimpleDateFormat simpleDateFormatnaissance = new SimpleDateFormat("dd/MM/yyyy");
         Date naissance = simpleDateFormatnaissance.parse("05/11/2002");

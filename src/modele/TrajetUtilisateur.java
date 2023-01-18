@@ -19,6 +19,12 @@ import javax.persistence.OneToMany;
  *
  * @author Dober
  */
+
+/**
+ * Classe TrajetUtilisateur qui contient les données d'une trajet lié à un utilisateur pour interagir avec la base de données.
+ * Elle possede des methodes de gestion et utilisé à la fois dans l'agorithme de recherche et dans l'UI
+ */
+
 @Entity
 public class TrajetUtilisateur implements Serializable {
 

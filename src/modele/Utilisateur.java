@@ -23,6 +23,11 @@ import javax.persistence.TemporalType;
  *
  * @author Dober
  */
+/**
+ * Classe Utilisateur qui contient les données d'une utilisateur pour interagir avec la base de données.
+ * Elle possede des methodes de gestion et posséde une liste de TrajetUtilisateur.
+ * Elle est uniquement utilisé dans l'UI.
+ */
 @Entity
 public class Utilisateur implements Serializable {
 

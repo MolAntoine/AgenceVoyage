@@ -755,6 +755,20 @@ public class Application extends javax.swing.JFrame {
 
     private void supMestrajetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supMestrajetsActionPerformed
         // TODO add your handling code here:
+        Requetes r = new Requetes(em);
+        DefaultMutableTreeNode tr = (DefaultMutableTreeNode)mesTrajets.getLastSelectedPathComponent();
+        DefaultTreeModel treeModel = new DefaultTreeModel(tr);
+        TrajetUtilisateur t = (TrajetUtilisateur)tr.getUserObject();
+        if(t!=null){
+        user.removeTrajetUser(t);
+        r.addTrajetUtilisateur(user);
+        }
+        tr.removeAllChildren();
+        for(TrajetUtilisateur tj : user.getTrajetsUser()){
+            ajoutTrajet(tr,tj);
+                        }
+        mesTrajets.setModel(treeModel);
+        treeModel.reload();   
     }//GEN-LAST:event_supMestrajetsActionPerformed
 
     private void sauvRechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvRechActionPerformed

@@ -96,6 +96,9 @@ public class Utilisateur implements Serializable {
     public void addTrajetUser(TrajetUtilisateur e){
         trajetsUser.add(e);
     }
+    public void removeTrajetUser(TrajetUtilisateur e){
+        trajetsUser.remove(e);
+    }
     
     
 

@@ -234,5 +234,20 @@ public class Requetes {
         em.persist(u);
         et.commit();
     }
+    public void deleteUtilisateur(Utilisateur u){
+        EntityTransaction et = em.getTransaction();
+        final String strQuery = "DELETE from Utilisateur u "
+                                + "WHERE u = :u";
+        et.begin();
+        Query query = em.createQuery(strQuery);
+        query.setParameter("u", u);
+        query.executeUpdate();
+        et.commit();
+    }
+    public List<Utilisateur> getUtilisateurs(){
+        final String strQuery = "SELECT u from Utilisateur u";
+        Query query = em.createQuery(strQuery);
+        return query.getResultList();
+    }
     
 }

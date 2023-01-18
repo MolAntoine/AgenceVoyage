@@ -518,6 +518,11 @@ public class Application extends javax.swing.JFrame {
         userList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         deleteUser.setText("Supprimer utilisateur");
+        deleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserActionPerformed(evt);
+            }
+        });
 
         checkboxIsAdmin.setText("Admin");
         checkboxIsAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -795,21 +800,6 @@ public class Application extends javax.swing.JFrame {
         }
         heureDepart.setFormatterFactory(new DefaultFormatterFactory(dateFormatter));
         
-        //gestion des GARES
-        homePage.setVisible(false);
-        rechercheTrajet.setVisible(true);
-
-        DefaultComboBoxModel gareSelection1 = new  DefaultComboBoxModel();
-        DefaultComboBoxModel gareSelection2 = new  DefaultComboBoxModel();
-        List<Gare> gares = req.getGares();
-        for(Gare g : gares){
-            gareSelection1.addElement(g);
-            gareSelection2.addElement(g);
-        }
-        gareDepart.setModel(gareSelection1);
-        gareArrivee.setModel(gareSelection2);
-        
-        
         //Gestion des checkbox
         checkDuree.setSelected(true);
     }                                                      
@@ -1025,8 +1015,17 @@ public class Application extends javax.swing.JFrame {
             List<TrajetUtilisateur> lt = new ArrayList<>();
 
             if(formIsValid()){
-                if(mdp.equals(mdpConfirm))
-                req.addUtilisateur(new Utilisateur(login,mdp,nom,prenom,adresse, bd,admin,lt));
+                if(mdp.equals(mdpConfirm)) {
+                    req.addUtilisateur(new Utilisateur(login, mdp, nom, prenom, adresse, bd, admin,lt));
+                    this.birthDate.setText("");
+                    this.firstName.setText("");
+                    this.familyName.setText("");
+                    this.username.setText("");
+                    this.passwdUser.setText("");
+                    this.passwdConfirm.setText("");
+                    this.address.setText("");
+                    JOptionPane.showMessageDialog(this, "Opération réussie");
+                }
             }
             else {
                 JOptionPane.showMessageDialog(this, "Entrée invalide");
@@ -1042,6 +1041,18 @@ public class Application extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_addUserActionPerformed
+
+    private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
+        Utilisateur deleted = (Utilisateur) this.userList.getSelectedItem();
+        req.deleteUtilisateur(deleted);
+        
+        
+        List<Utilisateur> lu = req.getUtilisateurs();
+        
+        DefaultComboBoxModel usersModel = new  DefaultComboBoxModel();
+        for(Utilisateur u : lu) usersModel.addElement(u);
+        this.userList.setModel(usersModel);
+    }//GEN-LAST:event_deleteUserActionPerformed
 
     private boolean formIsValid(){
         return !(this.address.getText().isEmpty() || 

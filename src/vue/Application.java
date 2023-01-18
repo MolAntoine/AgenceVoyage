@@ -24,6 +24,7 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import metier.*;
 import modele.*;
@@ -123,6 +124,15 @@ public class Application extends javax.swing.JFrame {
         mesTrajets.setShowsRootHandles(true);
         mesTrajets.setModel(null);
         
+        mesTrajets.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        mesTrajets.addTreeSelectionListener(new TreeSelectionListener(){
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+               DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)mesTrajets.getLastSelectedPathComponent();   
+               if(selectedNode == null || selectedNode.isLeaf()) mesTrajets.clearSelection();
+              }
+        });
+
         ImageIcon leafIcon = f1.creerImageIcon();
         ImageIcon nodeIcon = f2.creerImageIcon();
         DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
@@ -218,6 +228,11 @@ public class Application extends javax.swing.JFrame {
         searchButton.setMinimumSize(new java.awt.Dimension(200, 200));
         searchButton.setPreferredSize(new java.awt.Dimension(200, 200));
         searchButton.setRequestFocusEnabled(false);
+        searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchButtonMouseClicked(evt);
+            }
+        });
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -342,6 +357,12 @@ public class Application extends javax.swing.JFrame {
                 heureDepartActionPerformed(evt);
             }
         });
+
+        rechercheList.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                rechercheListValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(rechercheList);
 
         arretRech.setText("Arret Recherche");
@@ -352,6 +373,11 @@ public class Application extends javax.swing.JFrame {
         });
 
         sauvRech.setText("Sauvgarder Selection");
+        sauvRech.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sauvRechActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout rechercheTrajetLayout = new javax.swing.GroupLayout(rechercheTrajet);
         rechercheTrajet.setLayout(rechercheTrajetLayout);
@@ -508,7 +534,7 @@ public class Application extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(rechercheTrajet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(rechercheTrajet, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -730,6 +756,18 @@ public class Application extends javax.swing.JFrame {
     private void supMestrajetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supMestrajetsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_supMestrajetsActionPerformed
+
+    private void sauvRechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvRechActionPerformed
+        // TODO add your handling code here:
+        Requetes r = new Requetes(em);
+        DefaultMutableTreeNode tr = (DefaultMutableTreeNode)rechercheList.getLastSelectedPathComponent();
+        TrajetUtilisateur t = (TrajetUtilisateur)tr.getUserObject();
+        if(t!=null){
+        user.addTrajetUser(t);
+        r.addTrajetUtilisateur(user);
+        }
+        
+    }//GEN-LAST:event_sauvRechActionPerformed
 
     public static void main(String args[]) {   
         Application a = new Application(true);

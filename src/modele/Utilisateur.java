@@ -93,6 +93,9 @@ public class Utilisateur implements Serializable {
     public List<TrajetUtilisateur> getTrajetsUser() {
         return trajetsUser;
     }
+    public void addTrajetUser(TrajetUtilisateur e){
+        trajetsUser.add(e);
+    }
     
     
 

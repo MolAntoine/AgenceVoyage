@@ -144,5 +144,11 @@ public class Requetes {
         query.setParameter("u", u);
         return query.getResultList();
     }
+    public void addTrajetUtilisateur(Utilisateur u){
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        em.persist(u);
+        et.commit();
+    }
     
 }

@@ -24,7 +24,6 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import metier.*;
 import modele.*;
@@ -593,6 +592,7 @@ public class Application extends javax.swing.JFrame {
         }
         gareDepart.setModel(gareSelection1);
         gareArrivee.setModel(gareSelection2);
+        gareArrivee.removeItem(gares.get(0));
 
         //gestion des DATES
 
@@ -621,6 +621,17 @@ public class Application extends javax.swing.JFrame {
 
     private void gareDepartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gareDepartActionPerformed
         // TODO add your handling code here:
+        DefaultComboBoxModel gareSelection1 = new  DefaultComboBoxModel();
+        gareArrivee.removeAllItems();
+        Gare rem = (Gare)gareDepart.getSelectedItem();
+        Requetes r = new Requetes(em);
+        List<Gare> gares = r.getGares();
+        for(Gare g : gares){
+            gareSelection1.addElement(g);
+        }
+        gareArrivee.setModel(gareSelection1);
+        gareArrivee.removeItem(rem);
+        
     }//GEN-LAST:event_gareDepartActionPerformed
 
     private void rechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheActionPerformed

@@ -65,15 +65,6 @@ public class Utilisateur implements Serializable {
         this.admin = admin;
         this.trajetsUser = trajetsUser;
     }
-//    public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, Date naissance, Boolean admin) {
-//        this.login = login;
-//        this.mdp = mdp;
-//        this.nom = nom;
-//        this.prenom = prenom;
-//        this.adresse = adresse;
-//        this.naissance = naissance;
-//        this.admin = admin;
-//    }
     
     public Utilisateur() {
     }
@@ -134,7 +125,7 @@ public class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "Utilisateur{" + "id=" + id + ", login=" + login + ", mdp=" + mdp + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", naissance=" + naissance + ", admin=" + admin + '}';
+        return prenom + " (" + login + ") " + nom;
     }
 
 

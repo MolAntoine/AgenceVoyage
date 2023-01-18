@@ -65,6 +65,7 @@ public class Application extends javax.swing.JFrame {
         initFond(bgColor);
         cacherOnglets();
         initJTree();
+        initJTreeMesTrajets();
         if(user==null || !user.isAdmin()) adminButton.setVisible(false); //cache le bouton admin si on ne l'est pas
     }
     
@@ -102,6 +103,32 @@ public class Application extends javax.swing.JFrame {
         rechercheList.setCellRenderer(renderer);
         
     }   
+    
+    private void initJTreeMesTrajets(){
+        Fichier f1 = new Fichier("/icons/icons8-circled-16.png");
+        Fichier f2 = new Fichier("/icons/icons8-travel-signpost-16.png");
+        
+        mesTrajets.setRootVisible(false);
+        mesTrajets.setShowsRootHandles(true);
+        mesTrajets.setModel(null);
+        
+        ImageIcon leafIcon = f1.creerImageIcon();
+        ImageIcon nodeIcon = f2.creerImageIcon();
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        if (leafIcon != null) renderer.setLeafIcon(leafIcon);
+        if (nodeIcon != null) {
+            renderer.setOpenIcon(nodeIcon);
+            renderer.setClosedIcon(nodeIcon);
+        }
+        mesTrajets.setCellRenderer(renderer);
+        
+    }   
+    
+    
+    
+    
+    
+    
     
     private void ajoutTrajet(DefaultMutableTreeNode top, TrajetUtilisateur tr) {
         DefaultMutableTreeNode trajet = null;
@@ -660,10 +687,9 @@ public class Application extends javax.swing.JFrame {
     private void reviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewButtonActionPerformed
         // TODO add your handling code here:
        
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Trajets"); 
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("MesTrajets"); 
         DefaultTreeModel treeModel = new DefaultTreeModel(root);
         mesTrajets.setModel(treeModel);
-        
         homePage.setVisible(false);
         listeTrajets.setVisible(true);
         Requetes r = new Requetes(em);
@@ -674,7 +700,7 @@ public class Application extends javax.swing.JFrame {
                 ajoutTrajet(root,tr);
             }
         }
-        return;
+        treeModel.reload();   
     }//GEN-LAST:event_reviewButtonActionPerformed
 
     private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked

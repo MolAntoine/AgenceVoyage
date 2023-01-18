@@ -57,7 +57,10 @@ public class Test2 {
                 List<TrajetUtilisateur> trajetsUser = new ArrayList<>();
                 List<Troncon> trs = new ArrayList<>();
                 trs.add(r.getTronconById(1));
-                trajetsUser.add(new TrajetUtilisateur());
+                trs.add(r.getTronconById(2));
+                trs.add(r.getTronconById(3));
+                trs.add(r.getTronconById(4));
+                trajetsUser.add(new TrajetUtilisateur(trs));
                 
                 Utilisateur u = new Utilisateur("test","test","test","test","test",tdate,true,trajetsUser);
                 em.persist(u);

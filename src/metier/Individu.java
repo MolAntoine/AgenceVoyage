@@ -12,6 +12,13 @@ import modele.Troncon;
  *
  * @author Dober
  */
+
+/**
+ * Classe qui représente un individu dans l'algorithme génétique.
+ * Un individu est un ensemble de tronçons qui forment un trajet entre deux gares.
+ * 
+ */
+
 public class Individu {
     private final List<Troncon> tr;
     private double fitness;

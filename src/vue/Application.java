@@ -762,7 +762,23 @@ public class Application extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {    
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        //gestion des GARES
+        homePage.setVisible(false);
+        rechercheTrajet.setVisible(true);
+
+        DefaultComboBoxModel gareSelection1 = new  DefaultComboBoxModel();
+        DefaultComboBoxModel gareSelection2 = new  DefaultComboBoxModel();
+        Requetes r = new Requetes(em);
+        List<Gare> gares = r.getGares();
+        for(Gare g : gares){
+            gareSelection1.addElement(g);
+            gareSelection2.addElement(g);
+        }
+        gareDepart.setModel(gareSelection1);
+        gareArrivee.setModel(gareSelection2);
+        gareArrivee.removeItem(gares.get(0));
+
         //gestion des DATES
 
         MaskFormatter dateFormatter = null;
@@ -779,21 +795,6 @@ public class Application extends javax.swing.JFrame {
         }
         heureDepart.setFormatterFactory(new DefaultFormatterFactory(dateFormatter));
         
-        //gestion des GARES
-        homePage.setVisible(false);
-        rechercheTrajet.setVisible(true);
-
-        DefaultComboBoxModel gareSelection1 = new  DefaultComboBoxModel();
-        DefaultComboBoxModel gareSelection2 = new  DefaultComboBoxModel();
-        List<Gare> gares = req.getGares();
-        for(Gare g : gares){
-            gareSelection1.addElement(g);
-            gareSelection2.addElement(g);
-        }
-        gareDepart.setModel(gareSelection1);
-        gareArrivee.setModel(gareSelection2);
-        
-        
         //Gestion des checkbox
         checkDuree.setSelected(true);
     }                                                      
@@ -804,6 +805,17 @@ public class Application extends javax.swing.JFrame {
 
     private void gareDepartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gareDepartActionPerformed
         // TODO add your handling code here:
+        DefaultComboBoxModel gareSelection1 = new  DefaultComboBoxModel();
+        gareArrivee.removeAllItems();
+        Gare rem = (Gare)gareDepart.getSelectedItem();
+        Requetes r = new Requetes(em);
+        List<Gare> gares = r.getGares();
+        for(Gare g : gares){
+            gareSelection1.addElement(g);
+        }
+        gareArrivee.setModel(gareSelection1);
+        gareArrivee.removeItem(rem);
+        
     }//GEN-LAST:event_gareDepartActionPerformed
 
     private void rechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheActionPerformed
@@ -942,6 +954,20 @@ public class Application extends javax.swing.JFrame {
 
     private void supMestrajetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supMestrajetsActionPerformed
         // TODO add your handling code here:
+        Requetes r = new Requetes(em);
+        DefaultMutableTreeNode tr = (DefaultMutableTreeNode)mesTrajets.getLastSelectedPathComponent();
+        DefaultTreeModel treeModel = new DefaultTreeModel(tr);
+        TrajetUtilisateur t = (TrajetUtilisateur)tr.getUserObject();
+        if(t!=null){
+        user.removeTrajetUser(t);
+        r.addTrajetUtilisateur(user);
+        }
+        tr.removeAllChildren();
+        for(TrajetUtilisateur tj : user.getTrajetsUser()){
+            ajoutTrajet(tr,tj);
+                        }
+        mesTrajets.setModel(treeModel);
+        treeModel.reload();   
     }//GEN-LAST:event_supMestrajetsActionPerformed
 
     private void sauvRechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvRechActionPerformed
@@ -984,8 +1010,8 @@ public class Application extends javax.swing.JFrame {
             List<TrajetUtilisateur> lt = new ArrayList<>();
 
             if(formIsValid()){
-                if(!this.passwdConfirm.getText().equals(this.passwdConfirm.getText()))
-                req.addUtilisateur(new Utilisateur(login,mdp,nom,prenom,adresse, bd,admin,lt));
+                if(this.passwdUser.getText().equals(this.passwdConfirm.getText()))
+                    req.addUtilisateur(new Utilisateur(login,mdp,nom,prenom,adresse, bd,admin,lt));
             }
             else {
                 JOptionPane.showMessageDialog(this, "Entrée invalide");

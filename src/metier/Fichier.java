@@ -23,12 +23,27 @@ import modele.Troncon;
  *
  * @author komaeda
  */
+
+/**
+ * Classe Fichier contient les methodes utiles pour la lectures des fichier de donnée des gares et des troncons.
+ */
+
+
+
+
 public class Fichier {
     private String nomFichier;
 
     public Fichier() {
         this.nomFichier="test";
     }
+    
+        
+      /**
+     * Constructeur pour créer une instance de la classe Fichier
+     * @param nomFichier pour definir le nom du fichier à lire
+     */
+            
 
     public Fichier(String nomFichier) {
         this();
@@ -36,9 +51,11 @@ public class Fichier {
         if(nomFichier!=null && !nomFichier.trim().isEmpty()) this.nomFichier = nomFichier;
     }
     
-    
-    
-    
+          /**
+     * Méthode pour traiter le fichier contenant les gares
+     * @param em pour interagir avec la BDD
+     */
+            
     //traitement des fichiers de gares
     public void traiterFicGares(EntityManager em) throws IOException {
         Path path = Paths.get("./FichiersTests/" + this.nomFichier); //chemin du fichier
@@ -61,7 +78,11 @@ public class Fichier {
     }
     
     
-    
+     /**
+     * Méthode pour traiter le fichier contenant les troncons
+     * @param em pour interagir avec la BDD
+     */
+          
     
     //traitement des fichiers de trajets
     public void traiterFicTrajets(EntityManager em) throws IOException, ParseException {      

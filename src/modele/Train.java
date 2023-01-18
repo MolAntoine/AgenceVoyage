@@ -23,6 +23,14 @@ import javax.persistence.TemporalType;
  *
  * @author Dober
  */
+
+/**
+ * Classe Train qui contient les données d'un train pour interagir avec la base de données.
+ * Cette classe est constitué de variables propres au train et d'une liste de troncons
+ */
+
+
+
 @Entity
 public class Train implements Serializable {
 

@@ -24,6 +24,14 @@ import javax.persistence.TemporalType;
  *
  * @author Dober
  */
+
+/**
+ * Classe Troncon qui contient les données d'une trocon pour interagir avec la base de données.
+ * Elle possede des methodes de gestion,de simplification des formats temporels et de cout.
+ * Elle est utilisé dans l'ensemble du projet.
+ */
+
+
 @Entity
 public class Troncon implements Serializable {
 

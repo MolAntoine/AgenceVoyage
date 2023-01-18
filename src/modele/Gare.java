@@ -17,6 +17,12 @@ import javax.persistence.Id;
  *
  * @author Dober
  */
+
+/**
+ * Classe Gare qui contient les données d'une gare pour interagir avec la base de données.
+ */
+
+
 @Entity
 public class Gare implements Serializable {
 

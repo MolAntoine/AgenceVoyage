@@ -74,7 +74,7 @@ public class Application extends javax.swing.JFrame {
         cacherOnglets();
         
         initJTree(this.rechercheList);
-        initJTree(this.mesTrajets);
+        initJTreeMesTrajets();
         
         initDateTextBox();
         if(user==null || !user.isAdmin()) adminButton.setVisible(false); //cache le bouton admin si on ne l'est pas
@@ -128,6 +128,34 @@ public class Application extends javax.swing.JFrame {
         rechercheList.setCellRenderer(renderer);
         
     }   
+    private void initJTreeMesTrajets(){
+        Fichier f1 = new Fichier("/icons/icons8-circled-16.png");
+        Fichier f2 = new Fichier("/icons/icons8-travel-signpost-16.png");
+        
+        mesTrajets.setRootVisible(false);
+        mesTrajets.setShowsRootHandles(true);
+        mesTrajets.setModel(null);
+        
+        mesTrajets.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        mesTrajets.addTreeSelectionListener(new TreeSelectionListener(){
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+               DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)mesTrajets.getLastSelectedPathComponent();   
+               if(selectedNode == null || selectedNode.isLeaf()) mesTrajets.clearSelection();
+              }
+        });
+
+        ImageIcon leafIcon = f1.creerImageIcon();
+        ImageIcon nodeIcon = f2.creerImageIcon();
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        if (leafIcon != null) renderer.setLeafIcon(leafIcon);
+        if (nodeIcon != null) {
+            renderer.setOpenIcon(nodeIcon);
+            renderer.setClosedIcon(nodeIcon);
+        }
+        mesTrajets.setCellRenderer(renderer);
+        
+    } 
     
     private void initDateTextBox(){
         MaskFormatter dateFormatter = null;

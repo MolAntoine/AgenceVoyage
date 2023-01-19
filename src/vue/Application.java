@@ -170,16 +170,15 @@ public class Application extends javax.swing.JFrame {
     private void ajoutTrajet(DefaultMutableTreeNode top, TrajetUtilisateur tr) {
         DefaultMutableTreeNode trajet = null;
         DefaultMutableTreeNode gare = null;
-
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         trajet = new DefaultMutableTreeNode(tr);
         top.add(trajet);
-
-        gare = new DefaultMutableTreeNode(tr.getTrajet().get(0).getGareDepart().getNom() + "   Départ : " + tr.getTrajet().get(0).getHeureDepart());
+        gare = new DefaultMutableTreeNode(tr.getTrajet().get(0).getGareDepart().getNom() + "   Départ : " + timeFormat.format(tr.getTrajet().get(0).getHeureDepart()));
       
         trajet.add(gare);   
         
         for(Troncon t : tr.getTrajet()){
-            gare = new DefaultMutableTreeNode(t.getGareArrivee().getNom() + "   Arrivée : " + t.getHeureArrivee());
+            gare = new DefaultMutableTreeNode(t.getGareArrivee().getNom() + "   Arrivée : " + timeFormat.format(t.getHeureArrivee()));
             trajet.add(gare); 
         }
     }
